@@ -10,8 +10,6 @@ type MainProps = {
 
 function Main({placeCardCount, offers}: MainProps): JSX.Element {
   const [currentActiveCard, setActiveCard] = useState(0);
-  // eslint-disable-next-line no-console
-  console.log(currentActiveCard);
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -76,7 +74,7 @@ function Main({placeCardCount, offers}: MainProps): JSX.Element {
               <OfferList offers={offers} setActiveCard={setActiveCard} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">{currentActiveCard}</section>
             </div>
           </div>
         </div>
