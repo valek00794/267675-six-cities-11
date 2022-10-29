@@ -1,7 +1,7 @@
 import OfferList from '../../components/offers-list/offers-list';
 import Header from '../../components/header/header';
 import {Offers} from '../../types/offers';
-import { useState } from 'react';
+import {useState} from 'react';
 
 type MainProps = {
     placeCardCount: number;
