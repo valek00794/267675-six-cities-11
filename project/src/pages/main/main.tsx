@@ -1,6 +1,7 @@
 import OfferList from '../../components/offers-list/offers-list';
 import Header from '../../components/header/header';
 import {Offers} from '../../types/offers';
+import { useState } from 'react';
 
 type MainProps = {
     placeCardCount: number;
@@ -8,6 +9,9 @@ type MainProps = {
   }
 
 function Main({placeCardCount, offers}: MainProps): JSX.Element {
+  const [currentActiveCard, setActiveCard] = useState(0);
+  // eslint-disable-next-line no-console
+  console.log(currentActiveCard);
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -69,7 +73,7 @@ function Main({placeCardCount, offers}: MainProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OfferList offers={offers} />
+              <OfferList offers={offers} setActiveCard={setActiveCard} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
