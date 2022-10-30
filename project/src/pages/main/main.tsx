@@ -1,5 +1,6 @@
 import OfferList from '../../components/offers-list/offers-list';
 import Header from '../../components/header/header';
+import Map from '../../components/map/map';
 import {Offer} from '../../types/offers';
 import {useState} from 'react';
 
@@ -9,7 +10,15 @@ type MainProps = {
   }
 
 function Main({placeCardCount, offers}: MainProps): JSX.Element {
-  const [currentActiveCard, setActiveCard] = useState(0);
+  const [selectedCard, setActiveCard] = useState(0);
+  const city = {
+    'name': 'Amsterdam',
+    'location': {
+      'latitude': 52.37454,
+      'longitude': 4.897976,
+      'zoom': 13
+    }
+  };
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -74,7 +83,9 @@ function Main({placeCardCount, offers}: MainProps): JSX.Element {
               <OfferList offers={offers} setActiveCard={setActiveCard} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map">{currentActiveCard}</section>
+              <section className="cities__map">
+                <Map offers={offers} city={city} selectedCard={selectedCard}/>
+              </section>
             </div>
           </div>
         </div>
