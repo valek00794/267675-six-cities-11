@@ -1,11 +1,15 @@
-import PlaceCard from '../../components/place-card/place-card';
+import OfferList from '../../components/offers-list/offers-list';
 import Header from '../../components/header/header';
+import {Offers} from '../../types/offers';
+import {useState} from 'react';
 
 type MainProps = {
     placeCardCount: number;
+    offers: Offers;
   }
 
-function Main({placeCardCount}: MainProps): JSX.Element {
+function Main({placeCardCount, offers}: MainProps): JSX.Element {
+  const [currentActiveCard, setActiveCard] = useState(0);
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -67,16 +71,10 @@ function Main({placeCardCount}: MainProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                <PlaceCard></PlaceCard>
-                <PlaceCard></PlaceCard>
-                <PlaceCard></PlaceCard>
-                <PlaceCard></PlaceCard>
-                <PlaceCard></PlaceCard>
-              </div>
+              <OfferList offers={offers} setActiveCard={setActiveCard} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">{currentActiveCard}</section>
             </div>
           </div>
         </div>
