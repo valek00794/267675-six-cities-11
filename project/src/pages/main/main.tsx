@@ -1,11 +1,11 @@
 import OfferList from '../../components/offers-list/offers-list';
 import Header from '../../components/header/header';
-import {Offers} from '../../types/offers';
+import {Offer} from '../../types/offers';
 import {useState} from 'react';
 
 type MainProps = {
     placeCardCount: number;
-    offers: Offers;
+    offers: Offer[];
   }
 
 function Main({placeCardCount, offers}: MainProps): JSX.Element {

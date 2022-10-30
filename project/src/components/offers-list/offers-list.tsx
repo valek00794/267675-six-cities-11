@@ -1,8 +1,8 @@
-import { Offers } from '../../types/offers';
+import {Offer} from '../../types/offers';
 import PlaceCard from '../../components/place-card/place-card';
 
 type OfferListProps = {
-  offers: Offers;
+  offers: Offer[];
   setActiveCard: React.Dispatch<React.SetStateAction<number>>;
 }
 

@@ -6,11 +6,11 @@ import Favorites from '../../pages/favorites/favorites';
 import Room from '../../pages/room/room';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
-import {Offers} from '../../types/offers';
+import {Offer} from '../../types/offers';
 
 type AppProps = {
   placeCardCount: number;
-  offers: Offers;
+  offers: Offer[];
 }
 
 function App({placeCardCount, offers}: AppProps): JSX.Element {
