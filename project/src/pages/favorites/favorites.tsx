@@ -1,10 +1,10 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-import { Offers } from '../../types/offers';
+import {Offer} from '../../types/offers';
 import FavoriteCard from '../../components/favorite-card/favorite-card';
 
 type FavoritesProps = {
-  offers: Offers;
+  offers: Offer[];
 }
 
 function Favorites({ offers }: FavoritesProps): JSX.Element {

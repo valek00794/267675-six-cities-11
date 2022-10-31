@@ -11,8 +11,5 @@ export type Comment = {
     };
 };
 
-export type NewComment = {
-    comment: string;
-    rating: number;
-};
+export type NewComment = Pick<Comment, 'comment' | 'rating'>;
 
