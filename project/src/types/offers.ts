@@ -1,13 +1,5 @@
 export type Offer = {
   bedrooms: number;
-  city: {
-   location: {
-    latitude: number;
-    longitude: number;
-    zoom: number;
-   };
-   name: string;
-  };
   description: string;
   goods: [string];
   host: {
@@ -16,7 +8,6 @@ export type Offer = {
    isPro: boolean;
    name: string;
   };
-
   id: number;
   images: [string];
   isFavorite: boolean;
@@ -32,5 +23,15 @@ export type Offer = {
   rating: number;
   title: string;
   type: string;
+  city: Pick<City, keyof City>;
 };
+
+export type City = {
+  location: {
+   latitude: number;
+   longitude: number;
+   zoom: number;
+  };
+  name: string;
+ };
 

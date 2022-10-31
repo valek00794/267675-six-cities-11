@@ -1,4 +1,4 @@
-import {Offer} from '../../types/offers';
+import {Offer, City} from '../../types/offers';
 import {useRef, useEffect} from 'react';
 import useMap from '../../hooks/useMap';
 import {Icon, Marker} from 'leaflet';
@@ -9,7 +9,7 @@ const URL_MARKER_CURRENT = '../../img/pin-active.svg';
 
 type MapProps = {
     offers: Offer[];
-    city: Offer['city'];
+    city: City;
     selectedCard: number | undefined;
   }
 
@@ -49,7 +49,7 @@ function Map(props: MapProps): JSX.Element {
     }
   }, [map, props.offers, props.selectedCard]);
 
-  return <div style={{height: '519.8px', width: '512px'}} ref={mapRef}></div>;
+  return <div style={{height: '100%', width: '512px'}} ref={mapRef}></div>;
 }
 
 export default Map;
