@@ -1,6 +1,8 @@
-import {Offer} from '../../types/offers';
 import {Link} from 'react-router-dom';
 import cn from 'classnames';
+
+import {Offer} from '../../types/offers';
+
 
 type PlaceCardProps = {
   offer: Offer;

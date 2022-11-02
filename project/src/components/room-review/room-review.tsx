@@ -1,6 +1,7 @@
 
 import AddReviewForm from './add-review-form';
 import Review from './review';
+
 import {comments} from '../../mocks/comments';
 
 type RoomReviewProps = {

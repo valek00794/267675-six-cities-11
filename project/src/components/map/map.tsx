@@ -1,8 +1,12 @@
-import {Offer, City} from '../../types/offers';
 import {useRef, useEffect} from 'react';
-import useMap from '../../hooks/useMap';
 import {Icon, Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+
+import useMap from '../../hooks/useMap';
+
+import {MapStyle} from '../../consts';
+import {Offer, City} from '../../types/offers';
+
 
 const URL_MARKER_DEFAULT = '../../img/pin.svg';
 const URL_MARKER_CURRENT = '../../img/pin-active.svg';
@@ -11,6 +15,7 @@ type MapProps = {
     offers: Offer[];
     city: City;
     selectedCard: number | undefined;
+    mapStyle: MapStyle;
   }
 
 const defaultCustomIcon = new Icon({
@@ -49,7 +54,7 @@ function Map(props: MapProps): JSX.Element {
     }
   }, [map, props.offers, props.selectedCard]);
 
-  return <div style={{height: '100%', width: '512px'}} ref={mapRef}></div>;
+  return <div className={props.mapStyle} ref={mapRef}></div>;
 }
 
 export default Map;
