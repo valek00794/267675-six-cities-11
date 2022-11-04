@@ -1,8 +1,11 @@
+import {useState} from 'react';
+
 import OfferList from '../../components/offers-list/offers-list';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
+
 import {Offer} from '../../types/offers';
-import {useState} from 'react';
+import {city, MapStyle} from '../../consts';
 
 type MainProps = {
     placeCardCount: number;
@@ -11,14 +14,6 @@ type MainProps = {
 
 function Main({placeCardCount, offers}: MainProps): JSX.Element {
   const [selectedCard, setActiveCard] = useState(0);
-  const city = {
-    'name': 'Amsterdam',
-    'location': {
-      'latitude': 52.37454,
-      'longitude': 4.897976,
-      'zoom': 13
-    }
-  };
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -84,7 +79,12 @@ function Main({placeCardCount, offers}: MainProps): JSX.Element {
             </section>
             <div className="cities__right-section">
               <section className="cities__map">
-                <Map offers={offers} city={city} selectedCard={selectedCard}/>
+                <Map
+                  offers={offers}
+                  city={city}
+                  selectedCard={selectedCard}
+                  mapStyle={MapStyle.Main}
+                />
               </section>
             </div>
           </div>

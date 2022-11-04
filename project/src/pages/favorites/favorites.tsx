@@ -1,7 +1,8 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-import {Offer} from '../../types/offers';
 import FavoriteCard from '../../components/favorite-card/favorite-card';
+
+import {Offer} from '../../types/offers';
 
 type FavoritesProps = {
   offers: Offer[];

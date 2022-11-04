@@ -1,12 +1,14 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../consts';
+
 import Main from '../../pages/main/main';
 import Login from '../../pages/login/login';
 import Favorites from '../../pages/favorites/favorites';
 import Room from '../../pages/room/room';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
+
 import {Offer} from '../../types/offers';
+import {AppRoute, AuthorizationStatus} from '../../consts';
 
 type AppProps = {
   placeCardCount: number;
