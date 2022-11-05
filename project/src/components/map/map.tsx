@@ -5,16 +5,13 @@ import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/useMap';
 
 import {MapStyle} from '../../consts';
-import {Offer, City} from '../../types/offers';
-
+import {useAppSelector} from '../../hooks';
 
 const URL_MARKER_DEFAULT = '../../img/pin.svg';
 const URL_MARKER_CURRENT = '../../img/pin-active.svg';
 
 type MapProps = {
-    offers: Offer[];
-    city: City;
-    selectedCard: number | undefined;
+    selectedCard?: number;
     mapStyle: MapStyle;
   }
 
@@ -31,13 +28,13 @@ const currentCustomIcon = new Icon({
 });
 
 function Map(props: MapProps): JSX.Element {
-
+  const offers = useAppSelector((state) => state.offers);
   const mapRef = useRef(null);
-  const map = useMap(mapRef, props.city);
+  const map = useMap(mapRef);
 
   useEffect(() => {
     if (map) {
-      props.offers.forEach((offer) => {
+      offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
           lng: offer.location.longitude
@@ -52,7 +49,7 @@ function Map(props: MapProps): JSX.Element {
           .addTo(map);
       });
     }
-  }, [map, props.offers, props.selectedCard]);
+  }, [map, offers, props.selectedCard]);
 
   return <div className={props.mapStyle} ref={mapRef}></div>;
 }

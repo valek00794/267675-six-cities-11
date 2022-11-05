@@ -3,10 +3,10 @@ import { Offer } from '../types/offers';
 export const offers: Offer[] = [
   {
     'city': {
-      'name': 'Amsterdam',
+      'name': 'Paris',
       'location': {
-        'latitude': 52.37454,
-        'longitude': 4.897976,
+        'latitude': 48.85661,
+        'longitude': 2.351499,
         'zoom': 13
       }
     },
@@ -42,8 +42,8 @@ export const offers: Offer[] = [
     },
     'description': 'Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.',
     'location': {
-      'latitude': 52.37854,
-      'longitude': 4.894976,
+      'latitude': 48.83961,
+      'longitude': 2.342499,
       'zoom': 16
     },
     'id': 1
@@ -52,8 +52,8 @@ export const offers: Offer[] = [
     'city': {
       'name': 'Brussels',
       'location': {
-        'latitude': 52.3909553943508,
-        'longitude': 4.85309666406198,
+        'latitude': 50.846557,
+        'longitude': 4.351697,
         'zoom': 13
       }
     },
@@ -101,8 +101,8 @@ export const offers: Offer[] = [
     },
     'description': 'Discover daily local life in city center, friendly neighborhood, clandestine casino, karaoke, old-style artisans, art gallery and artist studio downstairs.',
     'location': {
-      'latitude': 52.3909553943508,
-      'longitude': 4.85309666406198,
+      'latitude': 50.844556999999995,
+      'longitude': 4.346697,
       'zoom': 16
     },
     'id': 2
@@ -111,8 +111,8 @@ export const offers: Offer[] = [
     'city': {
       'name': 'Brussels',
       'location': {
-        'latitude': 52.3609553943508,
-        'longitude': 4.85309666406198,
+        'latitude': 50.846557,
+        'longitude': 4.351697,
         'zoom': 13
       }
     },
@@ -156,8 +156,8 @@ export const offers: Offer[] = [
     },
     'description': 'Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.',
     'location': {
-      'latitude': 52.3609553943508,
-      'longitude': 4.85309666406198,
+      'latitude': 50.867557,
+      'longitude': 4.357697,
       'zoom': 16
     },
     'id': 3
@@ -166,8 +166,8 @@ export const offers: Offer[] = [
     'city': {
       'name': 'Cologne',
       'location': {
-        'latitude': 52.3909553943508,
-        'longitude': 4.929309666406198,
+        'latitude': 50.938361,
+        'longitude': 6.959974,
         'zoom': 13
       }
     },
@@ -211,8 +211,8 @@ export const offers: Offer[] = [
     },
     'description': 'Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.',
     'location': {
-      'latitude': 52.3909553943508,
-      'longitude': 4.929309666406198,
+      'latitude': 50.917361,
+      'longitude': 6.977974,
       'zoom': 16
     },
     'id': 4

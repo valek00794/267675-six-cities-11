@@ -8,21 +8,12 @@ export const changeSelectedCityAction = createAction('CHANGE_SELECTED_CITY', (ci
   },
 }));
 
-export const getOffersAction = createAction('GET_OFFERS', () => ({
-  payload: {
-    offers,
-  },
-}));
-
-/*
-export const pickOffersByCityAction = createAction('PICK_OFFERS_BY_CITY', (city: string, offers: Offer[]) => {
+export const pickOffersByCityAction = createAction('PICK_OFFERS_BY_CITY', (city: string) => {
   const offersByCity = offers.filter((offer) => offer.city.name === city);
   return {
     payload: {
-      offersByCity,
+      offers: offersByCity,
     },
   };
 });
-*/
-
 
