@@ -25,16 +25,17 @@ function Main(): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in {city}</b>
+              <b className="places__found">{offers.length !== 0 ? `${offers.length} places to stay in ${city}` : 'No places to stay available'} </b>
               <Sort sortRef={sortRef} sortUlState={sortUlState}/>
               <OfferList setActiveCard={setActiveCard} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map">
+                {offers.length !== 0 &&
                 <Map
                   selectedCard={selectedCard}
                   mapStyle={MapStyle.Main}
-                />
+                />}
               </section>
             </div>
           </div>
