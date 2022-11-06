@@ -16,11 +16,20 @@ export enum MapStyle {
   Room = 'Room__map',
 }
 
-export const city = {
-  'name': 'Amsterdam',
+export const cities = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf'
+] as const;
+
+export const defaultCityCoordinates = {
+  'name': 'Paris',
   'location': {
-    'latitude': 52.37454,
-    'longitude': 4.897976,
+    'latitude': 48.85661,
+    'longitude': 2.351499,
     'zoom': 13
-  }
-};
+  },
+} as const;

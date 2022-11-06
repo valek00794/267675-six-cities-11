@@ -11,17 +11,16 @@ import {Offer} from '../../types/offers';
 import {AppRoute, AuthorizationStatus} from '../../consts';
 
 type AppProps = {
-  placeCardCount: number;
   offers: Offer[];
 }
 
-function App({placeCardCount, offers}: AppProps): JSX.Element {
+function App({offers}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<Main placeCardCount={placeCardCount} offers={offers}></Main>}
+          element={<Main></Main>}
         />
         <Route
           path={AppRoute.Login}

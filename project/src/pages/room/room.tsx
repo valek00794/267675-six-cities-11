@@ -6,12 +6,13 @@ import RoomReview from '../../components/room-review/room-review';
 import Map from '../../components/map/map';
 import PlaceCard from '../../components/place-card/place-card';
 
-import {offers} from '../../mocks/offers';
-import {city, MapStyle} from '../../consts';
+import {MapStyle} from '../../consts';
+import {useAppSelector} from '../../hooks';
 
 function Room(): JSX.Element {
   const [selectedCard, setActiveCard] = useState(0);
   const {id} = useParams();
+  const offers = useAppSelector((state) => state.offers);
   const roomInfo = offers.find((offer) => offer.id === Number(id));
   const filltedOffers = offers.filter((offer) => offer.id !== Number(id));
   return (
@@ -97,8 +98,6 @@ function Room(): JSX.Element {
           </div>
           <section className="property__map map">
             <Map
-              offers={filltedOffers}
-              city={city}
               selectedCard={selectedCard}
               mapStyle={MapStyle.Room}
             />

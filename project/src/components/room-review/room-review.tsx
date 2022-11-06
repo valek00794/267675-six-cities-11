@@ -5,7 +5,7 @@ import Review from './review';
 import {comments} from '../../mocks/comments';
 
 type RoomReviewProps = {
-  id: string | undefined;
+  id?: string;
 }
 
 function RoomReview(props: RoomReviewProps): JSX.Element {
