@@ -1,4 +1,4 @@
-import cn from 'classnames';
+import classnames from 'classnames';
 
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {
@@ -20,6 +20,11 @@ function Sort(props : SortProp): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const city = useAppSelector((state) => state.city);
   const [ulState, setUlState] = props.sortUlState;
+  const getSortActiveClassName = (sortType : SortType) =>
+    classnames(
+      'places__option',
+      {'places__option--active': props.sortRef.current === sortType}
+    );
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -37,16 +42,13 @@ function Sort(props : SortProp): JSX.Element {
           </svg>
         </span>
         <ul
-          className={cn(
+          className={classnames(
             'places__options places__options--custom',
             {'places__options--opened': ulState}
           )}
         >
           <li
-            className={cn(
-              'places__option',
-              {'places__option--active': props.sortRef.current === SortType.Popular}
-            )}
+            className={getSortActiveClassName(SortType.Popular)}
             tabIndex={0}
             onClick={
               () => {
@@ -58,10 +60,7 @@ function Sort(props : SortProp): JSX.Element {
           >Popular
           </li>
           <li
-            className={cn(
-              'places__option',
-              {'places__option--active':  props.sortRef.current === SortType.PriceLowToHigh}
-            )}
+            className={getSortActiveClassName(SortType.PriceLowToHigh)}
             tabIndex={0}
             onClick={
               () => {
@@ -73,10 +72,7 @@ function Sort(props : SortProp): JSX.Element {
           >Price: low to high
           </li>
           <li
-            className={cn(
-              'places__option',
-              {'places__option--active':  props.sortRef.current === SortType.PriceHighToLow}
-            )}
+            className={getSortActiveClassName(SortType.PriceHighToLow)}
             tabIndex={0}
             onClick={
               () => {
@@ -88,10 +84,7 @@ function Sort(props : SortProp): JSX.Element {
           >Price: high to low
           </li>
           <li
-            className={cn(
-              'places__option',
-              {'places__option--active': props.sortRef.current === SortType.TopRatedFirst}
-            )}
+            className={getSortActiveClassName(SortType.TopRatedFirst)}
             tabIndex={0}
             onClick={
               () => {
