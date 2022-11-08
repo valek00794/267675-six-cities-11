@@ -7,8 +7,6 @@ import App from './components/app/app';
 
 import {store} from './store';
 
-import {offers} from './mocks/offers';
-
 const root = ReactDOM.createRoot(
   document.querySelector('#root') as HTMLElement,
 );
@@ -17,9 +15,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store = {store}>
-        <App
-          offers = {offers}
-        />
+        <App />
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,

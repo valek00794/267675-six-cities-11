@@ -9,14 +9,9 @@ import PrivateRoute from '../private-route/private-route';
 
 import Header from '../../components/header/header';
 
-import {Offer} from '../../types/offers';
 import {AppRoute, AuthorizationStatus} from '../../consts';
 
-type AppProps = {
-  offers: Offer[];
-}
-
-function App({offers}: AppProps): JSX.Element {
+function App(): JSX.Element {
   return (
 
     <Routes>
@@ -24,7 +19,7 @@ function App({offers}: AppProps): JSX.Element {
         <Route index element={<Main />} />
         <Route path={AppRoute.Favorites} element={
           <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-            <Favorites offers={offers}/>
+            <Favorites />
           </PrivateRoute>
         }
         />
