@@ -17,12 +17,14 @@ import {AuthorizationStatus} from '../consts';
 type State = {
   city: string;
   offers: Offer[];
+  serverOffers: Offer[];
   authStatus: AuthorizationStatus;
   isOffersDataLoading: boolean;
 }
 const initialState: State = {
   city: 'Paris',
   offers: [],
+  serverOffers: [],
   authStatus: AuthorizationStatus.Unknown,
   isOffersDataLoading: false,
 };
@@ -45,7 +47,7 @@ export const reducer = createReducer(initialState, (builder) => {
       state.offers = action.payload.offers;
     })
     .addCase(loadOffersAction, (state, action) => {
-      state.offers = action.payload.offers;
+      state.serverOffers = action.payload.serverOffers;
     })
     .addCase(requireAuthorizationAction, (state, action) => {
       state.authStatus = action.payload.authStatus;

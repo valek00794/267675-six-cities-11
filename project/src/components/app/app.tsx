@@ -20,7 +20,8 @@ function App(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authStatus);
   const isQuestionsDataLoading = useAppSelector((state) => state.isOffersDataLoading);
 
-  if (authorizationStatus === AuthorizationStatus.Unknown || isQuestionsDataLoading) {
+  if (isQuestionsDataLoading) {
+  //if (authorizationStatus === AuthorizationStatus.Unknown || isQuestionsDataLoading) {
     return (
       <LoadingScreen />
     );

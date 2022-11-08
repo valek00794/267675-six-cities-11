@@ -15,7 +15,7 @@ type CitiesListProp = {
 function CitiesList(props: CitiesListProp): JSX.Element {
   const dispatch = useAppDispatch();
   const selectedCity = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector((state) => state.serverOffers);
   const [, setUlState] = props.sortUlState;
   const getLinkClassName = (city : string) =>
     classnames(

@@ -11,7 +11,7 @@ import {useAppSelector} from '../../hooks';
 function Room(): JSX.Element {
   const [selectedCard, setActiveCard] = useState(0);
   const {id} = useParams();
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector((state) => state.serverOffers);
   const roomInfo = offers.find((offer) => offer.id === Number(id));
   const filltedOffers = offers.filter((offer) => offer.id !== Number(id));
   return (

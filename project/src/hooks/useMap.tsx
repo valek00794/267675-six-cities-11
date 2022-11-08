@@ -11,7 +11,7 @@ function useMap(
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef(false);
   const city = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector((state) => state.serverOffers);
   const cityCoordinates : City = offers.find((offer) => city === offer.city.name)?.city || defaultCityCoordinates;
 
   useEffect(() => {
