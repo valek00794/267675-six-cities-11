@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import {useRef, useState} from 'react';
 
 
@@ -16,6 +15,7 @@ function Main(): JSX.Element {
   const [selectedCard, setActiveCard] = useState(0);
   const sortRef = useRef(SortType.Popular);
   const sortUlState = useState(false);
+
   return (
     <div className="page page--gray page--main">
       <main className="page__main page__main--index">

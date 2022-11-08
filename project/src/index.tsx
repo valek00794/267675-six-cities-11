@@ -6,6 +6,9 @@ import {BrowserRouter} from 'react-router-dom';
 import App from './components/app/app';
 
 import {store} from './store';
+import {fetchOffersAction} from './store/api-actions';
+
+store.dispatch(fetchOffersAction());
 
 const root = ReactDOM.createRoot(
   document.querySelector('#root') as HTMLElement,

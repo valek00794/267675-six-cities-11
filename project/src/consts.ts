@@ -23,6 +23,12 @@ export enum SortType {
   TopRatedFirst = 'Top rated first',
 }
 
+export enum APIRoute {
+  Offers = '/hotels',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 export const cities = [
   'Paris',
   'Cologne',
