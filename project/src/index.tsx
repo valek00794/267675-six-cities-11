@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {Provider} from 'react-redux';
-import {BrowserRouter} from 'react-router-dom';
 
 import App from './components/app/app';
 
 import {store} from './store';
+import {checkAuthAction, fetchOffersAction} from './store/api-actions';
 
-import {offers} from './mocks/offers';
+store.dispatch(fetchOffersAction());
+store.dispatch(checkAuthAction());
 
 const root = ReactDOM.createRoot(
   document.querySelector('#root') as HTMLElement,
@@ -15,12 +16,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Provider store = {store}>
-        <App
-          offers = {offers}
-        />
-      </Provider>
-    </BrowserRouter>
+    <Provider store = {store}>
+      <App/>
+    </Provider>
   </React.StrictMode>,
 );

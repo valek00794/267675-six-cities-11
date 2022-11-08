@@ -1,6 +1,4 @@
-/* eslint-disable no-console */
 import {useRef, useState} from 'react';
-
 
 import CitiesList from '../../components/cities-list/cities-list';
 import Sort from '../../components/sort/sort';
