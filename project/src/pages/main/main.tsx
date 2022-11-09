@@ -1,6 +1,6 @@
 import {useRef, useState} from 'react';
 
-import Header from '../../components/header/header';
+
 import CitiesList from '../../components/cities-list/cities-list';
 import Sort from '../../components/sort/sort';
 import OfferList from '../../components/offers-list/offers-list';
@@ -15,9 +15,9 @@ function Main(): JSX.Element {
   const [selectedCard, setActiveCard] = useState(0);
   const sortRef = useRef(SortType.Popular);
   const sortUlState = useState(false);
+
   return (
     <div className="page page--gray page--main">
-      <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <CitiesList sortRef={sortRef} sortUlState={sortUlState} />

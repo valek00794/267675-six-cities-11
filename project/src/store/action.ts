@@ -1,7 +1,7 @@
 import { createAction} from '@reduxjs/toolkit';
 
-import {offers} from '../mocks/offers';
 import {Offer} from '../types/offers';
+import {AuthorizationStatus} from '../consts';
 
 export const changeSelectedCityAction = createAction('CHANGE_SELECTED_CITY', (city: string) => ({
   payload: {
@@ -9,7 +9,7 @@ export const changeSelectedCityAction = createAction('CHANGE_SELECTED_CITY', (ci
   },
 }));
 
-export const pickOffersByCityAction = createAction('PICK_OFFERS_BY_CITY', (city: string) => {
+export const pickOffersByCityAction = createAction('PICK_OFFERS_BY_CITY', (offers: Offer[], city: string) => {
   const offersByCity = offers.filter((offer) => offer.city.name === city);
   return {
     payload: {
@@ -44,5 +44,23 @@ export const sortByPriceHighToLowAction = createAction('SORT_BY_PRICE_HIGH_TO_LO
     },
   };
 });
+
+export const loadOffersAction = createAction('LOAD_OFFERS', (serverOffers : Offer[]) => ({
+  payload: {
+    serverOffers,
+  },
+}));
+
+export const requireAuthorizationAction = createAction('REQUIRE_AUTH', (authStatus : AuthorizationStatus) => ({
+  payload: {
+    authStatus,
+  },
+}));
+
+export const setOffersDataLoadingStatusAction = createAction('SET_LOAD_STATUS', (isOffersDataLoading : boolean) => ({
+  payload: {
+    isOffersDataLoading,
+  },
+}));
 
 

@@ -17,7 +17,7 @@ type SortProp = {
 
 function Sort(props : SortProp): JSX.Element {
   const dispatch = useAppDispatch();
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector((state) => state.serverOffers);
   const city = useAppSelector((state) => state.city);
   const [ulState, setUlState] = props.sortUlState;
   const getSortActiveClassName = (sortType : SortType) =>
@@ -52,7 +52,7 @@ function Sort(props : SortProp): JSX.Element {
             tabIndex={0}
             onClick={
               () => {
-                dispatch(pickOffersByCityAction(city));
+                dispatch(pickOffersByCityAction(offers, city));
                 props.sortRef.current = SortType.Popular;
                 setUlState(false);
               }
