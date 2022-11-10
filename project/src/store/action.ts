@@ -38,6 +38,9 @@ export const sortByPriceHighToLowAction = createAction('SORT_BY_PRICE_HIGH_TO_LO
 export const loadOffersAction = createAction('LOAD_OFFERS', (serverOffers : Offer[]) => ({
   payload: serverOffers,
 }));
+export const loadOfferAction = createAction('LOAD_OFFER', (serverOffer : Offer) => ({
+  payload: serverOffer,
+}));
 
 export const requireAuthorizationAction = createAction('REQUIRE_AUTH', (authStatus : AuthorizationStatus) => ({
   payload: authStatus,

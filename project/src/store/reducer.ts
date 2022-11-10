@@ -19,6 +19,7 @@ type State = {
   city: string;
   offers: Offer[];
   serverOffers: Offer[];
+  serverOffer: Offer | object;
   authStatus: AuthorizationStatus;
   authUser?: string;
   isOffersDataLoading: boolean;
@@ -28,6 +29,7 @@ const initialState: State = {
   city: 'Paris',
   offers: [],
   serverOffers: [],
+  serverOffer: {},
   authStatus: AuthorizationStatus.Unknown,
   isOffersDataLoading: false,
   toRoute: AppRoute.Login,

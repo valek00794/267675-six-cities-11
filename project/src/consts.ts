@@ -24,7 +24,9 @@ export enum SortType {
 }
 
 export enum APIRoute {
-  Offers = '/hotels',
+  Offers = '/hotels/',
+  NearbyOffers = '/nearbry',
+  Comments = '/comments/',
   Login = '/login',
   Logout = '/logout',
 }
