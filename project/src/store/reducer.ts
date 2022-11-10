@@ -7,7 +7,8 @@ import {
   sortByPriceLowToHighAction,
   sortByPriceHighToLowAction,
   loadOffersAction,
-  setOffersDataLoadingStatusAction
+  setOffersDataLoadingStatusAction,
+  requireAuthorizationAction
 } from './action';
 
 import {Offer} from '../types/offers';
@@ -50,6 +51,9 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOffersDataLoadingStatusAction, (state, action) => {
       state.isOffersDataLoading = action.payload.isOffersDataLoading;
+    })
+    .addCase(requireAuthorizationAction, (state, action) => {
+      state.authStatus = action.payload.authStatus;
     });
 });
 
