@@ -5,7 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/useMap';
 
 import {MapStyle} from '../../consts';
-import {useAppSelector} from '../../hooks';
+import {Offer} from '../../types/offers';
 
 const URL_MARKER_DEFAULT = '../../img/pin.svg';
 const URL_MARKER_CURRENT = '../../img/pin-active.svg';
@@ -13,6 +13,7 @@ const URL_MARKER_CURRENT = '../../img/pin-active.svg';
 type MapProps = {
     selectedCard?: number;
     mapStyle: MapStyle;
+    offers: Offer[];
   }
 
 const defaultCustomIcon = new Icon({
@@ -28,13 +29,12 @@ const currentCustomIcon = new Icon({
 });
 
 function Map(props: MapProps): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
   const mapRef = useRef(null);
   const map = useMap(mapRef);
 
   useEffect(() => {
     if (map) {
-      offers.forEach((offer) => {
+      props.offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
           lng: offer.location.longitude
@@ -42,14 +42,14 @@ function Map(props: MapProps): JSX.Element {
 
         marker
           .setIcon(
-            props.selectedCard !== undefined && offer.id === props.selectedCard
+            props.selectedCard !== undefined && offer.id === props.selectedCard && props.mapStyle === MapStyle.Main
               ? currentCustomIcon
               : defaultCustomIcon
           )
           .addTo(map);
       });
     }
-  }, [map, offers, props.selectedCard]);
+  }, [map, props.offers, props.selectedCard, props.mapStyle]);
 
   return <div className={props.mapStyle} ref={mapRef}></div>;
 }

@@ -3,10 +3,16 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 
 import {
   loadOffersAction,
+  loadOfferAction,
+  loadCommentsAction,
+  loadNearbyOffersAction,
   requireAuthorizationAction,
-  setOffersDataLoadingStatusAction,
   redirectToRouteAction,
   setAuthUserAction,
+  setOffersDataLoadingStatusAction,
+  setOfferDataLoadingStatusAction,
+  setCommentsDataLoadingStatusAction,
+  setNearbyOffersDataLoadingStatusAction,
 } from './action';
 import {saveToken, dropToken} from '../services/token';
 import {
@@ -17,6 +23,7 @@ import {
 
 import {AppDispatch, State} from '../types/state.js';
 import {Offer} from '../types/offers';
+import {Comment} from '../types/comment';
 import {AuthData, ResponseAuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 
@@ -31,6 +38,51 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
     const {data} = await api.get<Offer[]>(APIRoute.Offers);
     dispatch(setOffersDataLoadingStatusAction(false));
     dispatch(loadOffersAction(data));
+  },
+);
+
+export const fetchOfferAction = createAsyncThunk<void, string | undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOffer',
+  async (id, {dispatch, extra: api}) => {
+    dispatch(setOfferDataLoadingStatusAction(true));
+    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+    const {data} = await api.get<Offer>(APIRoute.Offers + id);
+    dispatch(setOfferDataLoadingStatusAction(false));
+    dispatch(loadOfferAction(data));
+  },
+);
+
+export const fetchCommentsAction = createAsyncThunk<void, string | undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchComments',
+  async (id, {dispatch, extra: api}) => {
+    dispatch(setCommentsDataLoadingStatusAction(true));
+    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+    const {data} = await api.get<Comment[]>(APIRoute.Comments + id);
+    dispatch(setCommentsDataLoadingStatusAction(false));
+    dispatch(loadCommentsAction(data));
+  },
+);
+
+export const fetchNearbyOffersAction = createAsyncThunk<void, string | undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchNearbyOffers',
+  async (id, {dispatch, extra: api}) => {
+    dispatch(setNearbyOffersDataLoadingStatusAction(true));
+    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+    const {data} = await api.get<Offer[]>(APIRoute.Offers + id + APIRoute.NearbyOffers);
+    dispatch(setNearbyOffersDataLoadingStatusAction(false));
+    dispatch(loadNearbyOffersAction(data));
   },
 );
 
