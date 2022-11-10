@@ -15,7 +15,8 @@ import {AppRoute, AuthorizationStatus} from '../../consts';
 
 function App(): JSX.Element {
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-  if (isOffersDataLoading) {
+  const authStatus = useAppSelector((state) => state.authStatus);
+  if (isOffersDataLoading || authStatus === AuthorizationStatus.Unknown) {
     return (
       <LoadingScreen />
     );
@@ -25,13 +26,13 @@ function App(): JSX.Element {
       <Route path={AppRoute.Main} element={<Header />} >
         <Route index element={<Main />} />
         <Route path={AppRoute.Favorites} element={
-          <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+          <PrivateRoute authorizationStatus={authStatus}>
             <Favorites />
           </PrivateRoute>
         }
         />
         <Route path={AppRoute.Room} element={<Room />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path={AppRoute.Error} element={<NotFound />} />
       </Route>
       <Route path={AppRoute.Login} element={<Login />} />
     </Routes>
