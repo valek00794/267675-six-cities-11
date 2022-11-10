@@ -21,7 +21,6 @@ function App(): JSX.Element {
     );
   }
   return (
-
     <Routes>
       <Route path={AppRoute.Main} element={<Header />} >
         <Route index element={<Main />} />
@@ -36,7 +35,6 @@ function App(): JSX.Element {
       </Route>
       <Route path={AppRoute.Login} element={<Login />} />
     </Routes>
-
   );
 }
 
