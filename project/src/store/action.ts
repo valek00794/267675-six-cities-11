@@ -1,6 +1,7 @@
 import { createAction} from '@reduxjs/toolkit';
 
 import {Offer} from '../types/offers';
+import {Comment} from '../types/comment';
 import {AuthorizationStatus, AppRoute} from '../consts';
 
 export const changeSelectedCityAction = createAction('CHANGE_SELECTED_CITY', (city: string) => ({
@@ -42,6 +43,18 @@ export const loadOfferAction = createAction('LOAD_OFFER', (serverOffer : Offer) 
   payload: serverOffer,
 }));
 
+export const loadOfferAction = createAction('LOAD_OFFER', (serverOffer : Offer) => ({
+  payload: serverOffer,
+}));
+
+export const loadCommentsAction = createAction('LOAD_COMMENTS', (serverComments : Comment[]) => ({
+  payload: serverComments,
+}));
+
+export const loadNearbyOffersAction = createAction('LOAD_NEARBY_OFFERS', (serverNearbyOffers : Offer[]) => ({
+  payload: serverNearbyOffers,
+}));
+
 export const requireAuthorizationAction = createAction('REQUIRE_AUTH', (authStatus : AuthorizationStatus) => ({
   payload: authStatus,
 }));
@@ -50,8 +63,20 @@ export const setAuthUserAction = createAction('SET_AUTH_USER', (authUser : strin
   payload: authUser,
 }));
 
-export const setOffersDataLoadingStatusAction = createAction('SET_LOAD_STATUS', (isOffersDataLoading : boolean) => ({
+export const setOffersDataLoadingStatusAction = createAction('SET_LOAD_STATUS_OFFERS', (isOffersDataLoading : boolean) => ({
   payload: isOffersDataLoading,
+}));
+
+export const setOfferDataLoadingStatusAction = createAction('SET_LOAD_STATUS_OFFER', (isOfferDataLoading : boolean) => ({
+  payload: isOfferDataLoading,
+}));
+
+export const setCommentsDataLoadingStatusAction = createAction('SET_LOAD_STATUS_COMMENTS', (isCommentsDataLoading : boolean) => ({
+  payload: isCommentsDataLoading,
+}));
+
+export const setNearbyOffersDataLoadingStatusAction = createAction('SET_LOAD_STATUS_NEARBY_OFFERS', (isNearbyOffersDataLoading : boolean) => ({
+  payload: isNearbyOffersDataLoading,
 }));
 
 export const redirectToRouteAction = createAction('REDIRECT_TO', (toRoute : AppRoute) => ({
