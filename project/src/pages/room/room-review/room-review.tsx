@@ -5,8 +5,11 @@ import {useAppSelector} from '../../../hooks';
 
 import {AuthorizationStatus} from '../../../consts';
 
+type RoomReviewProps = {
+  id?: string;
+};
 
-function RoomReview(): JSX.Element {
+function RoomReview(props: RoomReviewProps): JSX.Element {
   const comments = useAppSelector((state) => state.serverComments);
   const authStatus = useAppSelector((state) => state.authStatus);
   return (
@@ -16,7 +19,7 @@ function RoomReview(): JSX.Element {
         {comments.map((comment) => <Review comment={comment} key={comment.id}/>)}
       </ul>
       {authStatus === AuthorizationStatus.Auth &&
-      <AddReviewForm/>}
+      <AddReviewForm id={props.id}/>}
     </section>
   );
 }

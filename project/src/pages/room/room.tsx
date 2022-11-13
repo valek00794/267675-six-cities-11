@@ -6,7 +6,6 @@ import Map from '../../components/map/map';
 import PlaceCard from '../../components/place-card/place-card';
 import NotFound from '../../pages/not-found/not-found';
 
-
 import {MapStyle} from '../../consts';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 
@@ -24,6 +23,7 @@ function Room(): JSX.Element {
     dispatch(fetchOfferAction(id));
     dispatch(fetchCommentsAction(id));
     dispatch(fetchNearbyOffersAction(id));
+    window.scrollTo(0, 0);
   }, [dispatch, id]);
 
   if (id && !availableOffersIDs.includes(id)) {
@@ -106,7 +106,7 @@ function Room(): JSX.Element {
                 </p>
               </div>
             </div>
-            <RoomReview />
+            <RoomReview id={id}/>
           </div>
         </div>
         <section className="property__map map">

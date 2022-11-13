@@ -75,6 +75,9 @@ export const setCommentsDataLoadingStatusAction = createAction('SET_LOAD_STATUS_
 export const setCommentPostStatusAction = createAction('SET_COMMENT_POST', (isCommentPostStatus : boolean) => ({
   payload: isCommentPostStatus,
 }));
+export const setCommentSubmutAction = createAction('SET_COMMENT_SUBMIT_SUCCESS', (isCommentSubmitSuccessful : boolean) => ({
+  payload: isCommentSubmitSuccessful,
+}));
 
 export const setNearbyOffersDataLoadingStatusAction = createAction('SET_LOAD_STATUS_NEARBY_OFFERS', (isNearbyOffersDataLoading : boolean) => ({
   payload: isNearbyOffersDataLoading,

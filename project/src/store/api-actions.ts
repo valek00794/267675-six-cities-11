@@ -14,6 +14,7 @@ import {
   setCommentsDataLoadingStatusAction,
   setNearbyOffersDataLoadingStatusAction,
   setCommentPostStatusAction,
+  setCommentSubmutAction,
 } from './action';
 import {saveToken, dropToken} from '../services/token';
 import {
@@ -50,6 +51,7 @@ export const fetchOfferAction = createAsyncThunk<void, string | undefined, {
   'data/fetchOffer',
   async (id, {dispatch, extra: api}) => {
     dispatch(setOfferDataLoadingStatusAction(true));
+    // eslint академии ошибочно выдает предупреждение здесь и далее в файле
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const {data} = await api.get<Offer>(APIRoute.Offers + id);
     dispatch(setOfferDataLoadingStatusAction(false));
@@ -72,17 +74,22 @@ export const fetchCommentsAction = createAsyncThunk<void, string | undefined, {
   },
 );
 
-export const fetchPostCommentAction = createAsyncThunk<void, [NewComment, string], {
+export const fetchPostCommentAction = createAsyncThunk<void, [NewComment, string | undefined], {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/addComment',
   async ([{comment, rating}, id], {dispatch, extra: api}) => {
-    dispatch(setCommentPostStatusAction(true));
-    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-    await api.post<NewComment>(APIRoute.Comments, {comment, rating});
-    dispatch(setCommentPostStatusAction(false));
+    try {
+      dispatch(setCommentPostStatusAction(true));
+      // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+      await api.post<NewComment>(APIRoute.Comments + id, {comment, rating});
+      dispatch(setCommentPostStatusAction(false));
+      dispatch(setCommentSubmutAction(true));
+    } catch {
+      dispatch(setCommentSubmutAction(false));
+    }
   },
 );
 
