@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom';
 import {useEffect} from 'react';
 import classnames from 'classnames';
+import {memo} from 'react';
 
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {changeSelectedCityAction, pickOffersByCityAction} from '../../store/action';
@@ -9,14 +10,15 @@ import {cities, SortType} from '../../consts';
 
 type CitiesListProp = {
   sortRef: React.MutableRefObject<SortType>;
-  sortUlState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
+  setUlState: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function CitiesList(props: CitiesListProp): JSX.Element {
+  // eslint-disable-next-line no-console
+  console.log('cities-list');
   const dispatch = useAppDispatch();
   const selectedCity = useAppSelector((state) => state.city);
   const offers = useAppSelector((state) => state.serverOffers);
-  const [, setUlState] = props.sortUlState;
   const getLinkClassName = (city : string) =>
     classnames(
       'locations__item-link tabs__item',
@@ -25,7 +27,7 @@ function CitiesList(props: CitiesListProp): JSX.Element {
 
   useEffect(() => {
     dispatch(pickOffersByCityAction(offers, selectedCity));
-  }, [dispatch, selectedCity, offers]);
+  }, [dispatch]);
 
   return (
     <div className="tabs">
@@ -43,7 +45,7 @@ function CitiesList(props: CitiesListProp): JSX.Element {
                   dispatch(changeSelectedCityAction(city));
                   dispatch(pickOffersByCityAction(offers, city));
                   props.sortRef.current = SortType.Popular;
-                  setUlState(false);
+                  props.setUlState(false);
                 }}
               >
                 <span>{city}</span>
@@ -57,4 +59,4 @@ function CitiesList(props: CitiesListProp): JSX.Element {
   );
 }
 
-export default CitiesList;
+export default memo(CitiesList);
