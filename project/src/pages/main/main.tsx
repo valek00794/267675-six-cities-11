@@ -1,6 +1,4 @@
-/* eslint-disable no-console */
 import {useRef, useState} from 'react';
-
 
 import CitiesList from '../../components/cities-list/cities-list';
 import Sort from '../../components/sort/sort';
@@ -12,7 +10,6 @@ import {MapStyle, SortType} from '../../consts';
 
 function Main(): JSX.Element {
   const city = useAppSelector((state) => state.city);
-  console.log(city);
   const offers = useAppSelector((state) => state.offers);
   const [selectedCard, setActiveCard] = useState(0);
   const sortRef = useRef(SortType.Popular);
