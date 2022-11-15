@@ -6,7 +6,7 @@ import {Offer} from '../../types/offers';
 
 type PlaceCardProps = {
   offer: Offer;
-  setActiveCard: React.Dispatch<React.SetStateAction<number>>;
+  setActiveCard?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 function PlaceCard({offer, setActiveCard}: PlaceCardProps): JSX.Element {
@@ -18,7 +18,7 @@ function PlaceCard({offer, setActiveCard}: PlaceCardProps): JSX.Element {
 
   return (
     <article
-      onMouseOver={() => {setActiveCard(offer.id);}}
+      onMouseOver={() => {setActiveCard && setActiveCard(offer.id);}}
       className="cities__card place-card"
     >
       {offer.isPremium &&

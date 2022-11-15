@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+import {memo} from 'react';
 
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {
@@ -12,19 +13,23 @@ import {SortType} from '../../consts';
 
 type SortProp = {
     sortRef: React.MutableRefObject<SortType>;
-    sortUlState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
+    sortUlState: boolean;
+    setUlState: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function Sort(props : SortProp): JSX.Element {
+function Sort({sortRef, sortUlState, setUlState} : SortProp): JSX.Element {
+  // eslint-disable-next-line no-console
+  console.log('sort');
   const dispatch = useAppDispatch();
-  const offers = useAppSelector((state) => state.serverOffers);
+  const offers = useAppSelector((state) => state.offers);
+  const serverOffers = useAppSelector((state) => state.serverOffers);
   const city = useAppSelector((state) => state.city);
-  const [ulState, setUlState] = props.sortUlState;
   const getSortActiveClassName = (sortType : SortType) =>
     classnames(
       'places__option',
-      {'places__option--active': props.sortRef.current === sortType}
+      {'places__option--active': sortRef.current === sortType}
     );
+
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -36,7 +41,7 @@ function Sort(props : SortProp): JSX.Element {
           tabIndex={0}
           onClick={() => setUlState(true)}
         >
-          {props.sortRef.current}
+          {sortRef.current}
           <svg className="places__sorting-arrow" width="7" height="4">
             <use xlinkHref="#icon-arrow-select"></use>
           </svg>
@@ -44,7 +49,7 @@ function Sort(props : SortProp): JSX.Element {
         <ul
           className={classnames(
             'places__options places__options--custom',
-            {'places__options--opened': ulState}
+            {'places__options--opened': sortUlState}
           )}
         >
           <li
@@ -52,8 +57,8 @@ function Sort(props : SortProp): JSX.Element {
             tabIndex={0}
             onClick={
               () => {
-                dispatch(pickOffersByCityAction(offers, city));
-                props.sortRef.current = SortType.Popular;
+                dispatch(pickOffersByCityAction(serverOffers, city));
+                sortRef.current = SortType.Popular;
                 setUlState(false);
               }
             }
@@ -65,7 +70,7 @@ function Sort(props : SortProp): JSX.Element {
             onClick={
               () => {
                 dispatch(sortByPriceLowToHighAction(offers));
-                props.sortRef.current = SortType.PriceLowToHigh;
+                sortRef.current = SortType.PriceLowToHigh;
                 setUlState(false);
               }
             }
@@ -77,7 +82,7 @@ function Sort(props : SortProp): JSX.Element {
             onClick={
               () => {
                 dispatch(sortByPriceHighToLowAction(offers));
-                props.sortRef.current = SortType.PriceHighToLow;
+                sortRef.current = SortType.PriceHighToLow;
                 setUlState(false);
               }
             }
@@ -89,7 +94,7 @@ function Sort(props : SortProp): JSX.Element {
             onClick={
               () => {
                 dispatch(sortByRatingAction(offers));
-                props.sortRef.current = SortType.TopRatedFirst;
+                sortRef.current = SortType.TopRatedFirst;
                 setUlState(false);
               }
             }
@@ -101,4 +106,4 @@ function Sort(props : SortProp): JSX.Element {
   );
 }
 
-export default Sort;
+export default memo(Sort);

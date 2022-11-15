@@ -14,7 +14,10 @@ import {useAppSelector} from '../../hooks';
 import {AppRoute, AuthorizationStatus} from '../../consts';
 
 function App(): JSX.Element {
-  const {authStatus, isOffersDataLoading} = useAppSelector((state) => state);
+  // eslint-disable-next-line no-console
+  console.log('app');
+  const authStatus = useAppSelector((state) => state.authStatus);
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
   if (isOffersDataLoading || authStatus === AuthorizationStatus.Unknown) {
     return (
       <>

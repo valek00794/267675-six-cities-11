@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 
 function NotFound(): JSX.Element {
+  // eslint-disable-next-line no-console
+  console.log('404');
   return (
     <>
       <section className="container" style={{textAlign: 'center'}}>

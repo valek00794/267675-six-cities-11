@@ -1,6 +1,7 @@
 import {useRef, useEffect} from 'react';
 import {Icon, Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import {memo} from 'react';
 
 import useMap from '../../hooks/useMap';
 
@@ -29,6 +30,8 @@ const currentCustomIcon = new Icon({
 });
 
 function Map(props: MapProps): JSX.Element {
+  // eslint-disable-next-line no-console
+  console.log('map');
   const mapRef = useRef(null);
   const map = useMap(mapRef);
 
@@ -54,4 +57,4 @@ function Map(props: MapProps): JSX.Element {
   return <div className={props.mapStyle} ref={mapRef}></div>;
 }
 
-export default Map;
+export default memo(Map);
