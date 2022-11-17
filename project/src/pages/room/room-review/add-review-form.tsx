@@ -1,6 +1,8 @@
 import {useForm, SubmitHandler} from 'react-hook-form';
 import {useEffect} from 'react';
 import {memo} from 'react';
+import { useParams } from 'react-router';
+
 import {NewComment} from '../../../types/comment';
 
 import {fetchPostCommentAction} from '../../../store/api-actions';
@@ -12,15 +14,13 @@ const COMMENT_LENGTH = {
   max: 300
 };
 
-type AddReviewFormProps = {
-  id?: string;
-};
-
-function AddReviewForm(props: AddReviewFormProps): JSX.Element {
+function AddReviewForm(): JSX.Element {
   // eslint-disable-next-line no-console
   console.log('add-rev');
+  const {id} = useParams();
   const dispatch = useAppDispatch();
   const isCommentSubmitSuccessful = useAppSelector((state) => state.isCommentSubmitSuccessful);
+  console.log(isCommentSubmitSuccessful);
   const {
     register,
     handleSubmit,
@@ -36,10 +36,10 @@ function AddReviewForm(props: AddReviewFormProps): JSX.Element {
       reset();
       dispatch(setCommentSubmutAction(false));
     }
-  }, [formState, isSubmitSuccessful, reset, isCommentSubmitSuccessful]);
+  }, [formState]);
 
   const onSubmit: SubmitHandler<NewComment> = (data) => {
-    dispatch(fetchPostCommentAction([data, props.id]));
+    dispatch(fetchPostCommentAction([data, id]));
   };
 
   return (

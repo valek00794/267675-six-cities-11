@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
-import { useParams } from 'react-router';
+import {useParams} from 'react-router';
 import {useEffect} from 'react';
-import {memo} from 'react';
 
 import RoomReviews from './room-review/room-reviews';
 import Map from '../../components/map/map';
@@ -12,29 +11,30 @@ import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import {MapStyle, AuthorizationStatus} from '../../consts';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 
-import {fetchOfferAction, fetchCommentsAction, fetchNearbyOffersAction} from '../../store/api-actions';
+import {fetchOfferAction} from '../../store/api-actions';
 
 function Room(): JSX.Element {
   console.log('room');
   const authStatus = useAppSelector((state) => state.authStatus);
   const isOfferDataLoading = useAppSelector((state) => state.isOfferDataLoading);
-  //const isCommentsDataLoading = useAppSelector((state) => state.isCommentsDataLoading);
   //const isNearbyOffersDataLoading = useAppSelector((state) => state.isNearbyOffersDataLoading);
+  //const isCommentsDataLoading = useAppSelector((state) => state.isCommentsDataLoading);
   const serverOffers = useAppSelector((state) => state.serverOffers);
   const serverOffer = useAppSelector((state) => state.serverOffer);
+  //const serverComments = useAppSelector((state) => state.serverComments);
   const serverNearbyOffers = useAppSelector((state) => state.serverNearbyOffers);
   const {id} = useParams();
   const availableOffersIDs = [...new Set(serverOffers.map((offer) => offer.id.toString()))];
   const dispatch = useAppDispatch();
+  //console.log(isOfferDataLoading, isCommentsDataLoading, isNearbyOffersDataLoading);
+  //console.log(serverOffer, serverComments, serverNearbyOffers);
 
   useEffect(() => {
     dispatch(fetchOfferAction(id));
-    dispatch(fetchCommentsAction(id));
-    dispatch(fetchNearbyOffersAction(id));
-    //window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
   }, [dispatch, id]);
 
-  if (isOfferDataLoading || authStatus === AuthorizationStatus.Unknown) {
+  if (isOfferDataLoading || serverOffer.id === 0 || authStatus === AuthorizationStatus.Unknown) {
     return (
       <LoadingScreen />
     );
@@ -120,7 +120,7 @@ function Room(): JSX.Element {
                 </p>
               </div>
             </div>
-            <RoomReviews id={id}/>ёё
+            <RoomReviews />
           </div>
         </div>
         <section className="property__map map">
@@ -137,4 +137,4 @@ function Room(): JSX.Element {
   );
 }
 
-export default memo(Room);
+export default Room;

@@ -38,8 +38,8 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     dispatch(setOffersDataLoadingStatusAction(true));
     const {data} = await api.get<Offer[]>(APIRoute.Offers);
-    dispatch(setOffersDataLoadingStatusAction(false));
     dispatch(loadOffersAction(data));
+    dispatch(setOffersDataLoadingStatusAction(false));
   },
 );
 
@@ -54,8 +54,8 @@ export const fetchOfferAction = createAsyncThunk<void, string | undefined, {
     // eslint академии ошибочно выдает предупреждение здесь и далее в файле
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const {data} = await api.get<Offer>(APIRoute.Offers + id);
-    dispatch(setOfferDataLoadingStatusAction(false));
     dispatch(loadOfferAction(data));
+    dispatch(setOfferDataLoadingStatusAction(false));
   },
 );
 
@@ -69,8 +69,8 @@ export const fetchCommentsAction = createAsyncThunk<void, string | undefined, {
     dispatch(setCommentsDataLoadingStatusAction(true));
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const {data} = await api.get<Comment[]>(APIRoute.Comments + id);
-    dispatch(setCommentsDataLoadingStatusAction(false));
     dispatch(loadCommentsAction(data));
+    dispatch(setCommentsDataLoadingStatusAction(false));
   },
 );
 
@@ -104,8 +104,8 @@ export const fetchNearbyOffersAction = createAsyncThunk<void, string | undefined
     dispatch(setNearbyOffersDataLoadingStatusAction(true));
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const {data} = await api.get<Offer[]>(APIRoute.Offers + id + APIRoute.NearbyOffers);
-    dispatch(setNearbyOffersDataLoadingStatusAction(false));
     dispatch(loadNearbyOffersAction(data));
+    dispatch(setNearbyOffersDataLoadingStatusAction(false));
   },
 );
 
