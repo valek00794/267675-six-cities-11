@@ -8,7 +8,7 @@ function Review(comment: ReviewProps): JSX.Element {
   // eslint-disable-next-line no-console
   console.log('rev');
   return (
-    <li className="reviews__item">
+    <>
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img className="reviews__avatar user__avatar" src={comment.comment.user.avatarUrl} width="54" height="54" alt="Reviews avatar" />
@@ -29,7 +29,7 @@ function Review(comment: ReviewProps): JSX.Element {
         </p>
         <time className="reviews__time" dateTime={comment.comment.date}>{comment.comment.date}</time>
       </div>
-    </li>
+    </>
   );
 }
 
