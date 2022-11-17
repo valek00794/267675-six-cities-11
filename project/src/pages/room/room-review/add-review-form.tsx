@@ -20,7 +20,6 @@ function AddReviewForm(): JSX.Element {
   const {id} = useParams();
   const dispatch = useAppDispatch();
   const isCommentSubmitSuccessful = useAppSelector((state) => state.isCommentSubmitSuccessful);
-  console.log(isCommentSubmitSuccessful);
   const {
     register,
     handleSubmit,

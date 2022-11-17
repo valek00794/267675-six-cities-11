@@ -17,14 +17,13 @@ function RoomReviews(): JSX.Element {
   console.log('room-reviews');
   const serverComments = useAppSelector((state) => state.serverComments);
   const isCommentsDataLoading = useAppSelector((state) => state.isCommentsDataLoading);
-  const isCommentSubmitSuccessful = useAppSelector((state) => state.isCommentSubmitSuccessful);
   const lengthCommentsBlock = serverComments.length;
   const authStatus = useAppSelector((state) => state.authStatus);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchCommentsAction(id));
-  }, [dispatch, id, isCommentSubmitSuccessful]);
+  }, [dispatch, id]);
 
   return (
     <section className="property__reviews reviews">

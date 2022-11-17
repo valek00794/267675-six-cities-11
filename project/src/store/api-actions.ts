@@ -84,9 +84,10 @@ export const fetchPostCommentAction = createAsyncThunk<void, [NewComment, string
     try {
       dispatch(setCommentPostStatusAction(true));
       // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-      await api.post<NewComment>(APIRoute.Comments + id, {comment, rating});
+      const {data} = await api.post<Comment[]>(APIRoute.Comments + id, {comment, rating});
       dispatch(setCommentPostStatusAction(false));
       dispatch(setCommentSubmutAction(true));
+      dispatch(loadCommentsAction(data));
     } catch {
       dispatch(setCommentSubmutAction(false));
     }
