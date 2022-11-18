@@ -32,7 +32,6 @@ function App(): JSX.Element {
       <Route path={AppRoute.Default} element={<Header />} >
         <Route path={AppRoute.Default} element={<Navigate to="/Paris" />} />
         <Route path={AppRoute.Main} element={<Main />} />
-
         <Route path={AppRoute.Error} element={<NotFound />} />
         <Route path={AppRoute.Room} element={<Room />} />
         <Route path={AppRoute.Favorites} element={

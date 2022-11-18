@@ -17,7 +17,7 @@ function NearbyRooms(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchNearbyOffersAction(id));
-  }, [dispatch, id]);
+  }, [id]);
 
   return (
     <section className="near-places places">
