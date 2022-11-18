@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom';
 import classnames from 'classnames';
+import {useParams} from 'react-router';
 
 import {Offer} from '../../types/offers';
 
@@ -10,6 +11,7 @@ type PlaceCardProps = {
 }
 
 function PlaceCard({offer, setActiveCard}: PlaceCardProps): JSX.Element {
+  const {city} = useParams();
   const getFavoriteButtonClassName = () =>
     classnames(
       'place-card__bookmark-button button',
@@ -26,7 +28,7 @@ function PlaceCard({offer, setActiveCard}: PlaceCardProps): JSX.Element {
           <span>Premium</span>
         </div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`/offer/${offer.id}`}>
+        <Link to={`/${city}/offer/${offer.id}`}>
           <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image" />
         </Link>
       </div>
@@ -53,7 +55,7 @@ function PlaceCard({offer, setActiveCard}: PlaceCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
+          <Link to={`/${city}/offer/${offer.id}`}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">[{offer.type}]</p>
       </div>

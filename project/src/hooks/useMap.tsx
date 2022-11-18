@@ -1,17 +1,19 @@
 import {useEffect, useState, useRef, MutableRefObject} from 'react';
 import {Map, TileLayer} from 'leaflet';
+import {useParams} from 'react-router';
 
 import {City} from '../types/offers';
+import {Offer} from '../types/offers';
 import {defaultCityCoordinates} from '../consts';
-import {useAppSelector} from '../hooks';
+
 
 function useMap(
-  mapRef: MutableRefObject<HTMLElement | null>
+  mapRef: MutableRefObject<HTMLElement | null>,
+  offers: Offer[]
 ): Map | null {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef(false);
-  const city = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.offers);
+  const {city} = useParams();
   const cityCoordinates : City = offers.find((offer) => city === offer.city.name)?.city || defaultCityCoordinates;
 
   useEffect(() => {
