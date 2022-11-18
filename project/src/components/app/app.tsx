@@ -1,4 +1,4 @@
-import {Route, Routes} from 'react-router-dom';
+import {Route, Routes, Navigate} from 'react-router-dom';
 
 import Main from '../../pages/main/main';
 import Login from '../../pages/login/login';
@@ -29,16 +29,18 @@ function App(): JSX.Element {
   }
   return (
     <Routes>
-      <Route path={AppRoute.Main} element={<Header />} >
-        <Route index element={<Main />} />
+      <Route path={AppRoute.Default} element={<Header />} >
+        <Route path={AppRoute.Default} element={<Navigate to="/Paris" />} />
+        <Route path={AppRoute.Main} element={<Main />} />
+
+        <Route path={AppRoute.Error} element={<NotFound />} />
+        <Route path={AppRoute.Room} element={<Room />} />
         <Route path={AppRoute.Favorites} element={
           <PrivateRoute authorizationStatus={authStatus}>
             <Favorites />
           </PrivateRoute>
         }
         />
-        <Route path={AppRoute.Room} element={<Room />} />
-        <Route path={AppRoute.Error} element={<NotFound />} />
       </Route>
       <Route path={AppRoute.Login} element={<Login />} />
     </Routes>
