@@ -17,15 +17,17 @@ function Room(): JSX.Element {
   console.log('room');
   const authStatus = useAppSelector((state) => state.authStatus);
   const isOfferDataLoading = useAppSelector((state) => state.isOfferDataLoading);
-  //const isNearbyOffersDataLoading = useAppSelector((state) => state.isNearbyOffersDataLoading);
-  //const isCommentsDataLoading = useAppSelector((state) => state.isCommentsDataLoading);
+  const isNearbyOffersDataLoading = useAppSelector((state) => state.isNearbyOffersDataLoading);
+  const isCommentsDataLoading = useAppSelector((state) => state.isCommentsDataLoading);
   const serverOffers = useAppSelector((state) => state.serverOffers);
   const serverOffer = useAppSelector((state) => state.serverOffer);
   //const serverComments = useAppSelector((state) => state.serverComments);
   const serverNearbyOffers = useAppSelector((state) => state.serverNearbyOffers);
   const {id} = useParams();
+  console.log(id);
   const availableOffersIDs = [...new Set(serverOffers.map((offer) => offer.id.toString()))];
   const dispatch = useAppDispatch();
+  //console.log(serverNearbyOffers);
   //console.log(isOfferDataLoading, isCommentsDataLoading, isNearbyOffersDataLoading);
   //console.log(serverOffer, serverComments, serverNearbyOffers);
 
@@ -34,15 +36,17 @@ function Room(): JSX.Element {
     window.scrollTo(0, 0);
   }, [dispatch, id]);
 
-  if (isOfferDataLoading || serverOffer.id === 0 || authStatus === AuthorizationStatus.Unknown) {
+  if (id && !availableOffersIDs.includes(id)) {
+    return <NotFound />;
+  }
+
+  if (isOfferDataLoading || authStatus === AuthorizationStatus.Unknown) {
     return (
       <LoadingScreen />
     );
   }
 
-  if (id && !availableOffersIDs.includes(id)) {
-    return <NotFound />;
-  }
+
 
   return (
     <main className="page__main page__main--property">

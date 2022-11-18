@@ -1,21 +1,28 @@
 import {useRef, useState} from 'react';
+import {useParams} from 'react-router';
 
 import CitiesList from '../../components/cities-list/cities-list';
 import Sort from '../../components/sort/sort';
 import OffersList from '../../components/offers-list/offers-list';
 import Map from '../../components/map/map';
+import NotFound from '../../pages/not-found/not-found';
 
 import {useAppSelector} from '../../hooks';
-import {MapStyle, SortType} from '../../consts';
+import {cities, SortType, MapStyle} from '../../consts';
 
 function Main(): JSX.Element {
   // eslint-disable-next-line no-console
   console.log('main');
-  const city = useAppSelector((state) => state.city);
+  //const city = useAppSelector((state) => state.city);
   const offers = useAppSelector((state) => state.offers);
   const [selectedCard, setActiveCard] = useState(0);
   const sortRef = useRef(SortType.Popular);
   const [sortUlState, setUlState] = useState(false);
+  const {city} = useParams();
+
+  if (city && !cities.includes(city)) {
+    return <NotFound />;
+  }
 
   return (
     <div className="page page--gray page--main">
