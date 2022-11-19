@@ -1,23 +1,14 @@
 import {memo} from 'react';
-import {useEffect} from 'react';
-import {useParams} from 'react-router';
 
 import PlaceCard from '../../components/place-card/place-card';
 
-import {fetchNearbyOffersAction} from '../../store/api-actions';
-import {useAppSelector, useAppDispatch} from '../../hooks';
+import {useAppSelector} from '../../hooks';
 
 
 function NearbyRooms(): JSX.Element {
   // eslint-disable-next-line no-console
   console.log('nearby');
   const serverNearbyOffers = useAppSelector((state) => state.serverNearbyOffers);
-  const dispatch = useAppDispatch();
-  const {id} = useParams();
-
-  useEffect(() => {
-    dispatch(fetchNearbyOffersAction(id));
-  }, [id]);
 
   return (
     <section className="near-places places">

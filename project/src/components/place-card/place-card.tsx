@@ -28,7 +28,7 @@ function PlaceCard({offer, setActiveCard}: PlaceCardProps): JSX.Element {
           <span>Premium</span>
         </div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`/${city}/offer/${offer.id}`}>
+        <Link to={(city && `/${city}/offer/${offer.id}`) || '/'}>
           <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image" />
         </Link>
       </div>
@@ -55,7 +55,7 @@ function PlaceCard({offer, setActiveCard}: PlaceCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/${city}/offer/${offer.id}`}>{offer.title}</Link>
+          <Link to={(city && `/${city}/offer/${offer.id}`) || '/'}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">[{offer.type}]</p>
       </div>
