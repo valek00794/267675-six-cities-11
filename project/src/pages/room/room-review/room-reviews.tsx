@@ -1,26 +1,16 @@
 //import {memo} from 'react';
-import {useParams} from 'react-router';
-import {useEffect} from 'react';
-
 import AddReviewForm from './add-review-form';
 import Review from './review';
 
-import {useAppSelector, useAppDispatch} from '../../../hooks';
-import {fetchCommentsAction} from '../../../store/api-actions';
+import {useAppSelector} from '../../../hooks';
 
 import {AuthorizationStatus} from '../../../consts';
 
 function RoomReviews(): JSX.Element {
-  const {id} = useParams();
   // eslint-disable-next-line no-console
   console.log('room-reviews');
   const serverComments = useAppSelector((state) => state.serverComments);
   const authStatus = useAppSelector((state) => state.authStatus);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchCommentsAction(id));
-  }, [id]);
 
   return (
     <section className="property__reviews reviews">
