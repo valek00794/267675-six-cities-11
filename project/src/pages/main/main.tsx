@@ -28,7 +28,7 @@ function Main(): JSX.Element {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offers.length !== 0 ? `${offers.length} places to stay in ${city}` : 'No places to stay available'} </b>
               <Sort sortRef={sortRef} sortUlState={sortUlState} setUlState={setUlState}/>
-              <OfferList setActiveCard={setActiveCard} />
+              <OffersList setActiveCard={setActiveCard} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map">
