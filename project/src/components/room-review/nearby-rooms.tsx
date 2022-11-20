@@ -1,7 +1,7 @@
 import {memo} from 'react';
 
-import PlaceCard from '../../components/place-card/place-card';
-import Spinner from '../../components/spinner/spinner';
+import PlaceCard from '../place-card/place-card';
+import Spinner from '../spinner/spinner';
 
 import {useAppSelector} from '../../hooks';
 

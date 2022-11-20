@@ -2,10 +2,10 @@
 import {useParams} from 'react-router';
 import {useEffect} from 'react';
 
-import RoomReviews from './room-review/room-reviews';
+import RoomReviews from '../../components/room-review/room-reviews';
 import Map from '../../components/map/map';
 import NotFound from '../../pages/not-found/not-found';
-import NearbyRooms from './nearby-rooms';
+import NearbyRooms from '../../components/room-review/nearby-rooms';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 import {MapStyle, AuthorizationStatus} from '../../consts';

@@ -2,11 +2,11 @@
 import AddReviewForm from './add-review-form';
 import Review from './review';
 
-import Spinner from '../../../components/spinner/spinner';
+import Spinner from '../spinner/spinner';
 
-import {useAppSelector} from '../../../hooks';
+import {useAppSelector} from '../../hooks';
 
-import {AuthorizationStatus} from '../../../consts';
+import {AuthorizationStatus} from '../../consts';
 
 function RoomReviews(): JSX.Element {
   // eslint-disable-next-line no-console

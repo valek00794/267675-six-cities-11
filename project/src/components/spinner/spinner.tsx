@@ -5,11 +5,12 @@ type SpinnerProps = {
 }
 
 function Spinner({spinnerSize}: SpinnerProps): JSX.Element {
+  const [height, width] = spinnerSize;
   // eslint-disable-next-line no-console
   console.log('spinner');
   return (
-    <div className='spinnet-main'style={{height: `${spinnerSize[0]}px`, width: `${spinnerSize[1]}px`}}>
-      <div>1</div>
+    <div className='spinnet-main'style={{height: `${height}px`, width: `${width}px`}}>
+      <div></div>
     </div>
   );
 }
