@@ -1,6 +1,7 @@
+/* eslint-disable no-console */
 import {useForm, SubmitHandler} from 'react-hook-form';
 import {useEffect} from 'react';
-import {memo} from 'react';
+//import {memo} from 'react';
 import { useParams } from 'react-router';
 
 import {NewComment} from '../../../types/comment';
@@ -109,4 +110,4 @@ function AddReviewForm(): JSX.Element {
   );
 }
 
-export default memo(AddReviewForm);
+export default AddReviewForm;
