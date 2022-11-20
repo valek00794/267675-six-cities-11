@@ -7,9 +7,7 @@ import {useAppSelector} from '../../hooks';
 import {AuthorizationStatus} from '../../consts';
 
 function Header(): JSX.Element {
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-  const authStatus = useAppSelector((state) => state.authStatus);
-
+  const {isOffersDataLoading, isOfferDataLoading, authStatus} = useAppSelector((state) => state);
   return (
     <>
       <header className="header">
@@ -20,7 +18,7 @@ function Header(): JSX.Element {
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
               </Link>
             </div>
-            {!isOffersDataLoading &&
+            {!isOffersDataLoading && !isOfferDataLoading &&
             <nav className="header__nav">
               <ul className="header__nav-list">
                 {authStatus === AuthorizationStatus.Auth &&
