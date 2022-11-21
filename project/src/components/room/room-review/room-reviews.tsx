@@ -1,12 +1,13 @@
 //import {memo} from 'react';
 import AddReviewForm from './add-review-form';
 import Review from './review';
+import {memo} from 'react';
 
-import Spinner from '../spinner/spinner';
+import Spinner from '../../spinner/spinner';
 
-import {useAppSelector} from '../../hooks';
+import {useAppSelector} from '../../../hooks';
 
-import {AuthorizationStatus} from '../../consts';
+import {AuthorizationStatus} from '../../../consts';
 
 function RoomReviews(): JSX.Element {
   // eslint-disable-next-line no-console
@@ -38,4 +39,4 @@ function RoomReviews(): JSX.Element {
   );
 }
 
-export default RoomReviews;
+export default memo(RoomReviews);

@@ -1,17 +1,19 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 import {useParams} from 'react-router';
 import {useEffect} from 'react';
 
-import RoomReviews from '../../components/room-review/room-reviews';
+import RoomReviews from '../../components/room/room-review/room-reviews';
 import Map from '../../components/map/map';
 import NotFound from '../../pages/not-found/not-found';
-import NearbyRooms from '../../components/room-review/nearby-rooms';
+import NearbyRooms from '../../components/room/nearby-blok/nearby-rooms';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 import {MapStyle, AuthorizationStatus} from '../../consts';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 
 import {fetchOfferAction, fetchNearbyOffersAction, fetchCommentsAction} from '../../store/api-actions';
+import NearbyBlock from '../../components/room/nearby-blok/nearby-block';
 
 function Room(): JSX.Element {
   console.log('room');
@@ -20,7 +22,7 @@ function Room(): JSX.Element {
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
   const serverOffers = useAppSelector((state) => state.serverOffers);
   const serverOffer = useAppSelector((state) => state.serverOffer);
-  const serverNearbyOffers = useAppSelector((state) => state.serverNearbyOffers);
+  //const serverNearbyOffers = useAppSelector((state) => state.serverNearbyOffers);
   const {id} = useParams();
   const availableOffersIDs = [...new Set(serverOffers.map((offer) => offer.id.toString()))];
   const dispatch = useAppDispatch();
@@ -121,16 +123,17 @@ function Room(): JSX.Element {
             <RoomReviews />
           </div>
         </div>
-        <section className="property__map map">
-          <Map
-            offers={serverNearbyOffers}
-            mapStyle={MapStyle.Room}
-          />
-        </section>
+      </section>
+      <NearbyBlock />
+      {/* <section className="property__map map">
+        <Map
+          offers={serverNearbyOffers}
+          mapStyle={MapStyle.Room}
+        />
       </section>
       <div className="container">
         <NearbyRooms />
-      </div>
+      </div> */}
     </main>
   );
 }
