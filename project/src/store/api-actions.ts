@@ -6,7 +6,6 @@ import {
   loadOfferAction,
   loadCommentsAction,
   loadNearbyOffersAction,
-  requireAuthorizationAction,
   redirectToRouteAction,
   setAuthUserAction,
   setOffersDataLoadingStatusAction,
@@ -19,7 +18,6 @@ import {
 import {saveToken, dropToken} from '../services/token';
 import {
   APIRoute,
-  AuthorizationStatus,
   AppRoute,
 } from '../consts';
 
@@ -116,13 +114,8 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
 }>(
   'user/checkAuth',
   async (_arg, {dispatch, extra: api}) => {
-    try {
-      const res = await api.get<ResponseAuthData>(APIRoute.Login);
-      dispatch(requireAuthorizationAction(AuthorizationStatus.Auth));
-      dispatch(setAuthUserAction(res.data.email));
-    } catch {
-      dispatch(requireAuthorizationAction(AuthorizationStatus.NoAuth));
-    }
+    const res = await api.get<ResponseAuthData>(APIRoute.Login);
+    dispatch(setAuthUserAction(res.data.email));
   },
 );
 
@@ -133,15 +126,10 @@ export const loginAction = createAsyncThunk<void, AuthData, {
 }>(
   'user/login',
   async ({login: email, password}, {dispatch, extra: api}) => {
-    try {
-      const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
-      saveToken(token);
-      dispatch(requireAuthorizationAction(AuthorizationStatus.Auth));
-      dispatch(setAuthUserAction(email));
-      dispatch(redirectToRouteAction(AppRoute.Default));
-    } catch {
-      dispatch(requireAuthorizationAction(AuthorizationStatus.NoAuth));
-    }
+    const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
+    saveToken(token);
+    dispatch(setAuthUserAction(email));
+    dispatch(redirectToRouteAction(AppRoute.Default));
   },
 );
 
@@ -151,9 +139,8 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'user/logout',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
-    dispatch(requireAuthorizationAction(AuthorizationStatus.NoAuth));
   },
 );

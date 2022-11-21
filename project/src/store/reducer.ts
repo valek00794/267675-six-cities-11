@@ -14,7 +14,6 @@ import {
   setOfferDataLoadingStatusAction,
   setCommentsDataLoadingStatusAction,
   setNearbyOffersDataLoadingStatusAction,
-  requireAuthorizationAction,
   setAuthUserAction,
   setCommentPostStatusAction,
   setCommentSubmutAction,
@@ -31,7 +30,6 @@ type State = {
   serverOffer: Offer;
   serverComments: Comment[];
   serverNearbyOffers: Offer[];
-  authStatus: AuthorizationStatus;
   authUser?: string;
   isOffersDataLoading: boolean;
   isOfferDataLoading: boolean;
@@ -81,7 +79,6 @@ const initialState: State = {
   },
   serverComments: [],
   serverNearbyOffers: [],
-  authStatus: AuthorizationStatus.Unknown,
   isOffersDataLoading: false,
   isOfferDataLoading: false,
   isCommentsDataLoading: false,
@@ -138,9 +135,6 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setCommentSubmutAction, (state, action) => {
       state.isCommentSubmitSuccessful = action.payload;
-    })
-    .addCase(requireAuthorizationAction, (state, action) => {
-      state.authStatus = action.payload;
     })
     .addCase(setAuthUserAction, (state, action) => {
       state.authUser = action.payload;

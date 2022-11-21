@@ -33,6 +33,12 @@ export enum APIRoute {
   Logout = '/logout',
 }
 
+export enum NameSpace {
+  Data = 'DATA',
+  App = 'APP',
+  User = 'USER',
+}
+
 export const cities = [
   'Paris',
   'Cologne',
@@ -50,4 +56,3 @@ export const defaultCityCoordinates = {
     'zoom': 13
   },
 } as const;
-

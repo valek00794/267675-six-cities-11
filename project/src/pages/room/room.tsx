@@ -1,15 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 import {useParams} from 'react-router';
 import {useEffect} from 'react';
 
 import RoomReviews from '../../components/room/room-review/room-reviews';
-import Map from '../../components/map/map';
 import NotFound from '../../pages/not-found/not-found';
-import NearbyRooms from '../../components/room/nearby-blok/nearby-rooms';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
-import {MapStyle, AuthorizationStatus} from '../../consts';
+import {AuthorizationStatus} from '../../consts';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 
 import {fetchOfferAction, fetchNearbyOffersAction, fetchCommentsAction} from '../../store/api-actions';
@@ -22,7 +19,6 @@ function Room(): JSX.Element {
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
   const serverOffers = useAppSelector((state) => state.serverOffers);
   const serverOffer = useAppSelector((state) => state.serverOffer);
-  //const serverNearbyOffers = useAppSelector((state) => state.serverNearbyOffers);
   const {id} = useParams();
   const availableOffersIDs = [...new Set(serverOffers.map((offer) => offer.id.toString()))];
   const dispatch = useAppDispatch();
@@ -125,15 +121,6 @@ function Room(): JSX.Element {
         </div>
       </section>
       <NearbyBlock />
-      {/* <section className="property__map map">
-        <Map
-          offers={serverNearbyOffers}
-          mapStyle={MapStyle.Room}
-        />
-      </section>
-      <div className="container">
-        <NearbyRooms />
-      </div> */}
     </main>
   );
 }
