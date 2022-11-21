@@ -11,14 +11,17 @@ import Header from '../../components/header/header';
 
 import {useAppSelector} from '../../hooks';
 
-import {AppRoute, AuthorizationStatus} from '../../consts';
+import {AppRoute} from '../../consts';
+import {getAuthorizationStatus, getAuthCheckedStatus} from '../../store/user-process/selectors';
+import {getOffersDataLoadingStatus} from '../../store/app-data/selectors';
 
 function App(): JSX.Element {
   // eslint-disable-next-line no-console
   console.log('app');
-  const authStatus = useAppSelector((state) => state.authStatus);
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-  if (isOffersDataLoading || authStatus === AuthorizationStatus.Unknown) {
+  const authStatus = useAppSelector(getAuthorizationStatus);
+  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
+  const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
+  if (isOffersDataLoading || !isAuthChecked) {
     return (
       <>
         <Header />

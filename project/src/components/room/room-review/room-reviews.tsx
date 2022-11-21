@@ -1,4 +1,3 @@
-//import {memo} from 'react';
 import AddReviewForm from './add-review-form';
 import Review from './review';
 import {memo} from 'react';
@@ -8,13 +7,17 @@ import Spinner from '../../spinner/spinner';
 import {useAppSelector} from '../../../hooks';
 
 import {AuthorizationStatus} from '../../../consts';
+import {getComments, getCommentsDataLoadingStatus} from '../../../store/app-data/selectors';
+import {getAuthorizationStatus} from '../../../store/user-process/selectors';
+
 
 function RoomReviews(): JSX.Element {
   // eslint-disable-next-line no-console
   console.log('room-reviews');
-  const serverComments = useAppSelector((state) => state.serverComments);
-  const isCommentsDataLoading = useAppSelector((state) => state.isCommentsDataLoading);
-  const authStatus = useAppSelector((state) => state.authStatus);
+  const authStatus = useAppSelector(getAuthorizationStatus);
+  const serverComments = useAppSelector(getComments);
+  const isCommentsDataLoading = useAppSelector(getCommentsDataLoadingStatus);
+
 
   if (isCommentsDataLoading) {
     const spinnerSize = {

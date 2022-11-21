@@ -1,11 +1,7 @@
 import {Link} from 'react-router-dom';
-import {useEffect} from 'react';
 import classnames from 'classnames';
 import {memo} from 'react';
 import {useParams} from 'react-router';
-
-import {useAppSelector, useAppDispatch} from '../../hooks';
-import {changeSelectedCityAction, pickOffersByCityAction} from '../../store/action';
 
 import {cities, SortType} from '../../consts';
 
@@ -17,9 +13,7 @@ type CitiesListProp = {
 function CitiesList(props: CitiesListProp): JSX.Element {
   // eslint-disable-next-line no-console
   console.log('cities-list');
-  const dispatch = useAppDispatch();
   const {city} = useParams();
-  const offers = useAppSelector((state) => state.serverOffers);
 
   const getLinkClassName = (linkCity : string) =>
     classnames(
@@ -27,17 +21,10 @@ function CitiesList(props: CitiesListProp): JSX.Element {
       {'tabs__item--active': linkCity === city}
     );
 
-  const getOffers = () => {
-    dispatch(changeSelectedCityAction(city));
-    dispatch(pickOffersByCityAction(offers, city));
+  const sortReset = () => {
     props.sortRef.current = SortType.Popular;
     props.setUlState(false);
   };
-
-  useEffect(() => {
-    dispatch(changeSelectedCityAction(city));
-    dispatch(pickOffersByCityAction(offers, city));
-  }, [dispatch, city]);
 
   return (
     <div className="tabs">
@@ -51,7 +38,7 @@ function CitiesList(props: CitiesListProp): JSX.Element {
               <Link
                 className={getLinkClassName(el)}
                 to={`/${el}`}
-                onClick={() => getOffers}
+                onClick={() => sortReset}
               >
                 <span>{el}</span>
               </Link>

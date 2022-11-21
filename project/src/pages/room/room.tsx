@@ -6,19 +6,20 @@ import RoomReviews from '../../components/room/room-review/room-reviews';
 import NotFound from '../../pages/not-found/not-found';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
-import {AuthorizationStatus} from '../../consts';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 
 import {fetchOfferAction, fetchNearbyOffersAction, fetchCommentsAction} from '../../store/api-actions';
 import NearbyBlock from '../../components/room/nearby-blok/nearby-block';
+import {getAuthCheckedStatus} from '../../store/user-process/selectors';
+import {getOffersDataLoadingStatus, getOfferDataLoadingStatus, getServerOffers, getOffer} from '../../store/app-data/selectors';
 
 function Room(): JSX.Element {
   console.log('room');
-  const authStatus = useAppSelector((state) => state.authStatus);
-  const isOfferDataLoading = useAppSelector((state) => state.isOfferDataLoading);
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-  const serverOffers = useAppSelector((state) => state.serverOffers);
-  const serverOffer = useAppSelector((state) => state.serverOffer);
+  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
+  const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
+  const isOfferDataLoading = useAppSelector(getOfferDataLoadingStatus);
+  const serverOffers = useAppSelector(getServerOffers);
+  const serverOffer = useAppSelector(getOffer);
   const {id} = useParams();
   const availableOffersIDs = [...new Set(serverOffers.map((offer) => offer.id.toString()))];
   const dispatch = useAppDispatch();
@@ -34,7 +35,7 @@ function Room(): JSX.Element {
     return <NotFound />;
   }
 
-  if (isOfferDataLoading || isOffersDataLoading || authStatus === AuthorizationStatus.Unknown) {
+  if (isOfferDataLoading || isOffersDataLoading || !isAuthChecked) {
     return (
       <LoadingScreen />
     );

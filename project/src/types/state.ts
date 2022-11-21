@@ -1,5 +1,26 @@
 import {store} from '../store/index';
-import {AuthorizationStatus} from '../consts';
+import {AuthorizationStatus, AppRoute} from '../consts';
+import { Offer } from './offers';
+import { Comment } from './comment';
+
+export type AppData = {
+  serverOffers: Offer[];
+  offers: Offer[];
+  serverOffer: Offer;
+  serverComments: Comment[];
+  serverNearbyOffers: Offer[];
+  isOffersDataLoading: boolean;
+  isOfferDataLoading: boolean;
+  isCommentsDataLoading: boolean;
+  isNearbyOffersDataLoading: boolean;
+  isCommentPostStatus: boolean;
+  isCommentSubmitSuccessful: boolean;
+};
+
+export type AppProcess = {
+  city?: string;
+  toRoute: AppRoute;
+};
 
 export type UserProcess = {
   authStatus: AuthorizationStatus;

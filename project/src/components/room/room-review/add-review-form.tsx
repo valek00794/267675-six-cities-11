@@ -8,7 +8,7 @@ import {NewComment} from '../../../types/comment';
 
 import {fetchPostCommentAction} from '../../../store/api-actions';
 import {useAppDispatch, useAppSelector} from '../../../hooks';
-import {setCommentSubmutAction} from '../../../store/action';
+import {getCommentSubmitSuccessful} from '../../../store/app-data/selectors';
 
 const COMMENT_LENGTH = {
   min: 50,
@@ -20,7 +20,7 @@ function AddReviewForm(): JSX.Element {
   console.log('add-rev');
   const {id} = useParams();
   const dispatch = useAppDispatch();
-  const isCommentSubmitSuccessful = useAppSelector((state) => state.isCommentSubmitSuccessful);
+  const isCommentSubmitSuccessful = useAppSelector(getCommentSubmitSuccessful);
   const {
     register,
     handleSubmit,
@@ -34,7 +34,7 @@ function AddReviewForm(): JSX.Element {
   useEffect(() => {
     if (isSubmitSuccessful && isCommentSubmitSuccessful) {
       reset();
-      dispatch(setCommentSubmutAction(false));
+      //dispatch(setCommentSubmutAction(false));
     }
   }, [formState]);
 

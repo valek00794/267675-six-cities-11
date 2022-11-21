@@ -6,11 +6,12 @@ import HeaderNoAuth from './header-no-auth';
 
 import {useAppSelector} from '../../hooks';
 import {AuthorizationStatus} from '../../consts';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
 
 function Header(): JSX.Element {
   // eslint-disable-next-line no-console
   console.log('header');
-  const authStatus = useAppSelector((state) => state.authStatus);
+  const authStatus = useAppSelector(getAuthorizationStatus);
   return (
     <>
       <header className="header">

@@ -1,19 +1,9 @@
+/* eslint-disable no-console */
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 
 import {
-  loadOffersAction,
-  loadOfferAction,
-  loadCommentsAction,
-  loadNearbyOffersAction,
   redirectToRouteAction,
-  setAuthUserAction,
-  setOffersDataLoadingStatusAction,
-  setOfferDataLoadingStatusAction,
-  setCommentsDataLoadingStatusAction,
-  setNearbyOffersDataLoadingStatusAction,
-  setCommentPostStatusAction,
-  setCommentSubmutAction,
 } from './action';
 import {saveToken, dropToken} from '../services/token';
 import {
@@ -27,83 +17,68 @@ import {Comment, NewComment} from '../types/comment';
 import {AuthData, ResponseAuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 
-export const fetchOffersAction = createAsyncThunk<void, undefined, {
+export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchOffers',
-  async (_arg, {dispatch, extra: api}) => {
-    dispatch(setOffersDataLoadingStatusAction(true));
+  async (_arg, {extra: api}) => {
     const {data} = await api.get<Offer[]>(APIRoute.Offers);
-    dispatch(loadOffersAction(data));
-    dispatch(setOffersDataLoadingStatusAction(false));
+    return data;
   },
 );
 
-export const fetchOfferAction = createAsyncThunk<void, string | undefined, {
+export const fetchOfferAction = createAsyncThunk<Offer, string | undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchOffer',
   async (id, {dispatch, extra: api}) => {
-    dispatch(setOfferDataLoadingStatusAction(true));
     // eslint академии ошибочно выдает предупреждение здесь и далее в файле
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const {data} = await api.get<Offer>(APIRoute.Offers + id);
-    dispatch(loadOfferAction(data));
-    dispatch(setOfferDataLoadingStatusAction(false));
+    return data;
   },
 );
 
-export const fetchCommentsAction = createAsyncThunk<void, string | undefined, {
+export const fetchCommentsAction = createAsyncThunk<Comment[], string | undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchComments',
   async (id, {dispatch, extra: api}) => {
-    dispatch(setCommentsDataLoadingStatusAction(true));
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const {data} = await api.get<Comment[]>(APIRoute.Comments + id);
-    dispatch(loadCommentsAction(data));
-    dispatch(setCommentsDataLoadingStatusAction(false));
+    return data;
   },
 );
 
-export const fetchPostCommentAction = createAsyncThunk<void, [NewComment, string | undefined], {
+export const fetchPostCommentAction = createAsyncThunk<Comment[], [NewComment, string | undefined], {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/addComment',
   async ([{comment, rating}, id], {dispatch, extra: api}) => {
-    try {
-      dispatch(setCommentPostStatusAction(true));
-      // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-      const {data} = await api.post<Comment[]>(APIRoute.Comments + id, {comment, rating});
-      dispatch(setCommentPostStatusAction(false));
-      dispatch(loadCommentsAction(data));
-      dispatch(setCommentSubmutAction(true));
-    } catch {
-      dispatch(setCommentSubmutAction(false));
-    }
+    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+    const {data} = await api.post<Comment[]>(APIRoute.Comments + id, {comment, rating});
+    return data;
   },
 );
 
-export const fetchNearbyOffersAction = createAsyncThunk<void, string | undefined, {
+export const fetchNearbyOffersAction = createAsyncThunk<Offer[], string | undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchNearbyOffers',
   async (id, {dispatch, extra: api}) => {
-    dispatch(setNearbyOffersDataLoadingStatusAction(true));
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const {data} = await api.get<Offer[]>(APIRoute.Offers + id + APIRoute.NearbyOffers);
-    dispatch(loadNearbyOffersAction(data));
-    dispatch(setNearbyOffersDataLoadingStatusAction(false));
+    return data;
   },
 );
 
@@ -115,7 +90,8 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   'user/checkAuth',
   async (_arg, {dispatch, extra: api}) => {
     const res = await api.get<ResponseAuthData>(APIRoute.Login);
-    dispatch(setAuthUserAction(res.data.email));
+    console.log(res);
+    //dispatch(setAuthUserAction(res.data.email));
   },
 );
 
@@ -128,7 +104,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   async ({login: email, password}, {dispatch, extra: api}) => {
     const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(token);
-    dispatch(setAuthUserAction(email));
+    //dispatch(setAuthUserAction(email));
     dispatch(redirectToRouteAction(AppRoute.Default));
   },
 );
