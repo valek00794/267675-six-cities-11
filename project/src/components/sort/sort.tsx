@@ -11,9 +11,6 @@ type SortProp = {
 }
 
 function Sort({sort, sortRef, sortUlState, setUlState} : SortProp): JSX.Element {
-  // eslint-disable-next-line no-console
-  console.log('sort');
-
   const getSortActiveClassName = (sortType : SortType) =>
     classnames(
       'places__option',

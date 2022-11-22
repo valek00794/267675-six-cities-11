@@ -1,6 +1,7 @@
-import PlaceCard from '../../components/place-card/place-card';
 import {memo} from 'react';
 import {useParams} from 'react-router';
+
+import PlaceCard from '../../components/place-card/place-card';
 
 import {SortType} from '../../consts';
 import {getSortOffers} from '../../store/app-data/selectors';
@@ -12,9 +13,6 @@ type OfferListProps = {
 }
 
 function OfferList({setActiveCard, sort}: OfferListProps): JSX.Element {
-  // eslint-disable-next-line no-console
-  console.log('offers-list');
-
   const {city} = useParams();
   const offers = useAppSelector((state) => getSortOffers(state, city, sort));
   return (

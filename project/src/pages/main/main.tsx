@@ -14,8 +14,6 @@ import {getSortOffers} from '../../store/app-data/selectors';
 
 
 function Main(): JSX.Element {
-  // eslint-disable-next-line no-console
-  console.log('main');
   const [selectedCard, setActiveCard] = useState(0);
   const sortRef = useRef(SortType.Popular);
   const [sortUlState, setUlState] = useState(false);

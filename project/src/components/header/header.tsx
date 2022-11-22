@@ -9,8 +9,6 @@ import {AuthorizationStatus} from '../../consts';
 import {getAuthorizationStatus} from '../../store/user-process/selectors';
 
 function Header(): JSX.Element {
-  // eslint-disable-next-line no-console
-  console.log('header');
   const authStatus = useAppSelector(getAuthorizationStatus);
   return (
     <>

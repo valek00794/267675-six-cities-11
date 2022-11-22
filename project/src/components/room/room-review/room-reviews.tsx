@@ -1,8 +1,8 @@
-import AddReviewForm from './add-review-form';
-import Review from './review';
 import {memo} from 'react';
 
 import Spinner from '../../spinner/spinner';
+import AddReviewForm from './add-review-form';
+import Review from './review';
 
 import {useAppSelector} from '../../../hooks';
 
@@ -12,8 +12,7 @@ import {getAuthorizationStatus} from '../../../store/user-process/selectors';
 
 
 function RoomReviews(): JSX.Element {
-  // eslint-disable-next-line no-console
-  console.log('room-reviews');
+
   const authStatus = useAppSelector(getAuthorizationStatus);
   const serverComments = useAppSelector(getComments);
   const isCommentsDataLoading = useAppSelector(getCommentsDataLoadingStatus);

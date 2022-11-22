@@ -9,15 +9,13 @@ import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import PrivateRoute from '../private-route/private-route';
 import Header from '../../components/header/header';
 
-import {useAppSelector} from '../../hooks';
+import {AppRoute, defaultCityCoordinates} from '../../consts';
 
-import {AppRoute} from '../../consts';
+import {useAppSelector} from '../../hooks';
 import {getAuthorizationStatus, getAuthCheckedStatus} from '../../store/user-process/selectors';
 import {getOffersDataLoadingStatus} from '../../store/app-data/selectors';
 
 function App(): JSX.Element {
-  // eslint-disable-next-line no-console
-  console.log('app');
   const authStatus = useAppSelector(getAuthorizationStatus);
   const isAuthChecked = useAppSelector(getAuthCheckedStatus);
   const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
@@ -33,7 +31,7 @@ function App(): JSX.Element {
   return (
     <Routes>
       <Route path={AppRoute.Default} element={<Header />} >
-        <Route path={AppRoute.Default} element={<Navigate to="/Paris" />} />
+        <Route path={AppRoute.Default} element={<Navigate to={`/${defaultCityCoordinates.name}`} />} />
         <Route path={AppRoute.Main} element={<Main />} />
         <Route path={AppRoute.Error} element={<NotFound />} />
         <Route path={AppRoute.Room} element={<Room />} />

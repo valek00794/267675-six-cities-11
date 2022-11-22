@@ -5,8 +5,6 @@ type ReviewProps = {
 }
 
 function Review(comment: ReviewProps): JSX.Element {
-  // eslint-disable-next-line no-console
-  console.log('rev');
   return (
     <>
       <div className="reviews__user user">

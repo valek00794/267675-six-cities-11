@@ -6,10 +6,8 @@ import {AuthData} from '../../types/auth-data';
 import {useAppDispatch} from '../../hooks';
 import {loginAction} from '../../store/api-actions';
 
-
 function Login(): JSX.Element {
-  // eslint-disable-next-line no-console
-  console.log('login');
+
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 

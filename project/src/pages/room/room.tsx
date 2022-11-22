@@ -1,20 +1,18 @@
-/* eslint-disable no-console */
 import {useParams} from 'react-router';
 import {useEffect} from 'react';
 
 import RoomReviews from '../../components/room/room-review/room-reviews';
 import NotFound from '../../pages/not-found/not-found';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import NearbyBlock from '../../components/room/nearby-blok/nearby-block';
 
 import {useAppSelector, useAppDispatch} from '../../hooks';
 
 import {fetchOfferAction, fetchNearbyOffersAction, fetchCommentsAction} from '../../store/api-actions';
-import NearbyBlock from '../../components/room/nearby-blok/nearby-block';
 import {getAuthCheckedStatus} from '../../store/user-process/selectors';
 import {getOffersDataLoadingStatus, getOfferDataLoadingStatus, getServerOffers, getOffer} from '../../store/app-data/selectors';
 
 function Room(): JSX.Element {
-  console.log('room');
   const isAuthChecked = useAppSelector(getAuthCheckedStatus);
   const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
   const isOfferDataLoading = useAppSelector(getOfferDataLoadingStatus);

@@ -7,8 +7,6 @@ import {getNearbyOffers} from '../../../store/app-data/selectors';
 
 
 function NearbyRooms(): JSX.Element {
-  // eslint-disable-next-line no-console
-  console.log('nearby');
   const serverNearbyOffers = useAppSelector(getNearbyOffers);
 
   return (

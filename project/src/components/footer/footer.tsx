@@ -1,8 +1,6 @@
 import {Link} from 'react-router-dom';
 
 function Footer(): JSX.Element {
-  // eslint-disable-next-line no-console
-  console.log('footer');
   return (
     <footer className="footer container">
       <Link className="footer__logo-link" to="/">

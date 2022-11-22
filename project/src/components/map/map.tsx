@@ -30,8 +30,6 @@ const currentCustomIcon = new Icon({
 });
 
 function Map({selectedCard, mapStyle, offers}: MapProps): JSX.Element {
-  // eslint-disable-next-line no-console
-  console.log('map');
   const mapRef = useRef(null);
   const map = useMap(mapRef, offers);
 

@@ -1,13 +1,11 @@
-/* eslint-disable no-console */
 import {useForm, SubmitHandler} from 'react-hook-form';
 import {useEffect} from 'react';
-//import {memo} from 'react';
 import { useParams } from 'react-router';
 
 import {NewComment} from '../../../types/comment';
 
-import {fetchPostCommentAction} from '../../../store/api-actions';
 import {useAppDispatch, useAppSelector} from '../../../hooks';
+import {fetchPostCommentAction} from '../../../store/api-actions';
 import {getCommentSubmitSuccessful} from '../../../store/app-data/selectors';
 
 const COMMENT_LENGTH = {
@@ -16,8 +14,6 @@ const COMMENT_LENGTH = {
 };
 
 function AddReviewForm(): JSX.Element {
-  // eslint-disable-next-line no-console
-  console.log('add-rev');
   const {id} = useParams();
   const dispatch = useAppDispatch();
   const isCommentSubmitSuccessful = useAppSelector(getCommentSubmitSuccessful);
@@ -34,7 +30,6 @@ function AddReviewForm(): JSX.Element {
   useEffect(() => {
     if (isSubmitSuccessful && isCommentSubmitSuccessful) {
       reset();
-      //dispatch(setCommentSubmutAction(false));
     }
   }, [formState]);
 

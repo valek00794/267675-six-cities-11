@@ -11,8 +11,6 @@ type CitiesListProp = {
 }
 
 function CitiesList({sortRef, setUlState}: CitiesListProp): JSX.Element {
-  // eslint-disable-next-line no-console
-  console.log('cities-list');
   const {city} = useParams();
 
   const getLinkClassName = (linkCity : string) =>
