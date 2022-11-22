@@ -7,9 +7,10 @@ type SortProp = {
     sortRef: React.MutableRefObject<SortType>;
     sortUlState: boolean;
     setUlState: React.Dispatch<React.SetStateAction<boolean>>;
+    sort: SortType;
 }
 
-function Sort({sortRef, sortUlState, setUlState} : SortProp): JSX.Element {
+function Sort({sort, sortRef, sortUlState, setUlState} : SortProp): JSX.Element {
   // eslint-disable-next-line no-console
   console.log('sort');
 
@@ -19,7 +20,6 @@ function Sort({sortRef, sortUlState, setUlState} : SortProp): JSX.Element {
       {'places__option--active': sortRef.current === sortType}
     );
 
-
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
@@ -28,7 +28,7 @@ function Sort({sortRef, sortUlState, setUlState} : SortProp): JSX.Element {
         tabIndex={0}
         onClick={() => setUlState(true)}
       >
-        {sortRef.current}
+        {sort}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
