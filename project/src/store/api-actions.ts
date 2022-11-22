@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 
@@ -35,7 +34,7 @@ export const fetchOfferAction = createAsyncThunk<Offer, string | undefined, {
   extra: AxiosInstance;
 }>(
   'data/fetchOffer',
-  async (id, {dispatch, extra: api}) => {
+  async (id, {extra: api}) => {
     // eslint академии ошибочно выдает предупреждение здесь и далее в файле
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const {data} = await api.get<Offer>(APIRoute.Offers + id);
@@ -49,7 +48,7 @@ export const fetchCommentsAction = createAsyncThunk<Comment[], string | undefine
   extra: AxiosInstance;
 }>(
   'data/fetchComments',
-  async (id, {dispatch, extra: api}) => {
+  async (id, {extra: api}) => {
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const {data} = await api.get<Comment[]>(APIRoute.Comments + id);
     return data;
@@ -75,27 +74,26 @@ export const fetchNearbyOffersAction = createAsyncThunk<Offer[], string | undefi
   extra: AxiosInstance;
 }>(
   'data/fetchNearbyOffers',
-  async (id, {dispatch, extra: api}) => {
+  async (id, {extra: api}) => {
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const {data} = await api.get<Offer[]>(APIRoute.Offers + id + APIRoute.NearbyOffers);
     return data;
   },
 );
 
-export const checkAuthAction = createAsyncThunk<void, undefined, {
+export const checkAuthAction = createAsyncThunk<string, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'user/checkAuth',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     const res = await api.get<ResponseAuthData>(APIRoute.Login);
-    console.log(res);
-    //dispatch(setAuthUserAction(res.data.email));
+    return res.data.email;
   },
 );
 
-export const loginAction = createAsyncThunk<void, AuthData, {
+export const loginAction = createAsyncThunk<string, AuthData, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -104,8 +102,8 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   async ({login: email, password}, {dispatch, extra: api}) => {
     const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(token);
-    //dispatch(setAuthUserAction(email));
     dispatch(redirectToRouteAction(AppRoute.Default));
+    return email;
   },
 );
 
