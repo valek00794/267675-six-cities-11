@@ -1,12 +1,22 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {useRef, FormEvent} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 import {AuthData} from '../../types/auth-data';
 
-import {useAppDispatch} from '../../hooks';
+import {useAppSelector, useAppDispatch} from '../../hooks';
 import {loginAction} from '../../store/api-actions';
+import {getAuthCheckedStatus} from '../../store/user-process/selectors';
+import {AppRoute} from '../../consts';
 
 function Login(): JSX.Element {
+  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
+  const navigate = useNavigate();
+
+
+  /*if (isAuthChecked) {
+    navigate(AppRoute.Default);
+  }*/
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
