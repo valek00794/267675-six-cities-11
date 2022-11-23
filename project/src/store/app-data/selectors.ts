@@ -16,7 +16,7 @@ export const postComment = (state: State): Comment[]=> state[NameSpace.Data].com
 export const getCommentPostStatus = (state: State): boolean => state[NameSpace.Data].isCommentPostStatus;
 export const getCommentSubmitSuccessful = (state: State): boolean => state[NameSpace.Data].isCommentSubmitSuccessful;
 export const getFavoriteOffers = (state: State): Offer[] => state[NameSpace.Data].favoriteOffers;
-export const getFavoriteOffersStatus = (state: State): boolean => state[NameSpace.Data].isOfferDataLoading;
+export const getFavoriteOffersCount = (state: State): number => state[NameSpace.Data].favoriteOffers.length;
 
 export const getSortOffers = (state: State, city?: string, sortType?: SortType): Offer[] => {
   const offers = getOffersByCity(state, city);
