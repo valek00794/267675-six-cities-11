@@ -10,9 +10,8 @@ import HistoryRouter from './components/history-route/history-route';
 import browserHistory from './browser-history';
 
 import {store} from './store';
-import {fetchOffersAction, checkAuthAction} from './store/api-actions';
+import {checkAuthAction} from './store/api-actions';
 
-store.dispatch(fetchOffersAction());
 store.dispatch(checkAuthAction());
 
 const root = ReactDOM.createRoot(

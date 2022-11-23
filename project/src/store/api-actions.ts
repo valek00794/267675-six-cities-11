@@ -95,7 +95,7 @@ export const fetchFavoriteOffersAction = createAsyncThunk<Offer[], undefined, {
   },
 );
 
-export const fetchPostOfferFavoriteStatusAction = createAsyncThunk<Offer[], [string | undefined, string | undefined], {
+export const fetchPostOfferFavoriteStatusAction = createAsyncThunk<Offer, [string | undefined, string | undefined], {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -103,7 +103,7 @@ export const fetchPostOfferFavoriteStatusAction = createAsyncThunk<Offer[], [str
   'data/changeOfferFavoriteStatus',
   async ([id, status], {extra: api}) => {
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-    const {data} = await api.post<Offer[]>(APIRoute.Favorite + id + status);
+    const {data} = await api.post<Offer>(APIRoute.Favorite + id + status);
     return data;
   },
 );

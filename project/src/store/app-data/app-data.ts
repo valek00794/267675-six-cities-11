@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
+//import update from 'immutability-helper';
 import {NameSpace} from '../../consts';
 import {AppData} from '../../types/state';
 import {
@@ -8,6 +9,7 @@ import {
   fetchNearbyOffersAction,
   fetchPostCommentAction,
   fetchFavoriteOffersAction,
+  fetchPostOfferFavoriteStatusAction
 } from '../api-actions';
 
 const initialState: AppData = {
@@ -109,6 +111,18 @@ export const appData = createSlice({
       .addCase(fetchFavoriteOffersAction.fulfilled, (state, action) => {
         state.favoriteOffers = action.payload;
         state.isFavoriteOffersDataLoading = false;
+      })
+      .addCase(fetchPostOfferFavoriteStatusAction.fulfilled, (state, action) => {
+        const updateOffers = () => state.offers.map((item) => {
+          if (item.id !== action.payload.id) {
+            return item;
+          }
+          return {
+            ...item,
+            ...action.payload
+          };
+        });
+        state.offers = updateOffers();
       });
   }
 });
