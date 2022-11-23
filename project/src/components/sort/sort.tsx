@@ -1,104 +1,58 @@
 import classnames from 'classnames';
-
-import {useAppSelector, useAppDispatch} from '../../hooks';
-import {
-  sortByRatingAction,
-  sortByPriceLowToHighAction,
-  sortByPriceHighToLowAction,
-  pickOffersByCityAction,
-} from '../../store/action';
+import {memo} from 'react';
 
 import {SortType} from '../../consts';
 
 type SortProp = {
     sortRef: React.MutableRefObject<SortType>;
-    sortUlState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
+    sortUlState: boolean;
+    setUlState: React.Dispatch<React.SetStateAction<boolean>>;
+    sort: SortType;
 }
 
-function Sort(props : SortProp): JSX.Element {
-  const dispatch = useAppDispatch();
-  const offers = useAppSelector((state) => state.serverOffers);
-  const city = useAppSelector((state) => state.city);
-  const [ulState, setUlState] = props.sortUlState;
+function Sort({sort, sortRef, sortUlState, setUlState} : SortProp): JSX.Element {
   const getSortActiveClassName = (sortType : SortType) =>
     classnames(
       'places__option',
-      {'places__option--active': props.sortRef.current === sortType}
+      {'places__option--active': sortRef.current === sortType}
     );
 
   return (
     <form className="places__sorting" action="#" method="get">
-      {offers.length !== 0 &&
-      <>
-        <span className="places__sorting-caption">Sort by</span>
-        <span
-          className="places__sorting-type"
-          tabIndex={0}
-          onClick={() => setUlState(true)}
-        >
-          {props.sortRef.current}
-          <svg className="places__sorting-arrow" width="7" height="4">
-            <use xlinkHref="#icon-arrow-select"></use>
-          </svg>
-        </span>
-        <ul
-          className={classnames(
-            'places__options places__options--custom',
-            {'places__options--opened': ulState}
-          )}
-        >
+      <span className="places__sorting-caption">Sort by</span>
+      <span
+        className="places__sorting-type"
+        tabIndex={0}
+        onClick={() => setUlState(true)}
+      >
+        {sort}
+        <svg className="places__sorting-arrow" width="7" height="4">
+          <use xlinkHref="#icon-arrow-select"></use>
+        </svg>
+      </span>
+      <ul
+        className={classnames(
+          'places__options places__options--custom',
+          {'places__options--opened': sortUlState}
+        )}
+      >
+        {(Object.keys(SortType) as Array<keyof typeof SortType>).map((type) => (
           <li
-            className={getSortActiveClassName(SortType.Popular)}
+            key={type}
+            className={getSortActiveClassName(SortType[type])}
             tabIndex={0}
             onClick={
               () => {
-                dispatch(pickOffersByCityAction(offers, city));
-                props.sortRef.current = SortType.Popular;
+                sortRef.current = SortType[type];
                 setUlState(false);
               }
             }
-          >Popular
+          >{SortType[type]}
           </li>
-          <li
-            className={getSortActiveClassName(SortType.PriceLowToHigh)}
-            tabIndex={0}
-            onClick={
-              () => {
-                dispatch(sortByPriceLowToHighAction(offers));
-                props.sortRef.current = SortType.PriceLowToHigh;
-                setUlState(false);
-              }
-            }
-          >Price: low to high
-          </li>
-          <li
-            className={getSortActiveClassName(SortType.PriceHighToLow)}
-            tabIndex={0}
-            onClick={
-              () => {
-                dispatch(sortByPriceHighToLowAction(offers));
-                props.sortRef.current = SortType.PriceHighToLow;
-                setUlState(false);
-              }
-            }
-          >Price: high to low
-          </li>
-          <li
-            className={getSortActiveClassName(SortType.TopRatedFirst)}
-            tabIndex={0}
-            onClick={
-              () => {
-                dispatch(sortByRatingAction(offers));
-                props.sortRef.current = SortType.TopRatedFirst;
-                setUlState(false);
-              }
-            }
-          >Top rated first
-          </li>
-        </ul>
-      </>}
+        ))}
+      </ul>
     </form>
   );
 }
 
-export default Sort;
+export default memo(Sort);

@@ -1,6 +1,7 @@
 import {useRef, useEffect} from 'react';
 import {Icon, Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import {memo} from 'react';
 
 import useMap from '../../hooks/useMap';
 
@@ -28,13 +29,13 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map(props: MapProps): JSX.Element {
+function Map({selectedCard, mapStyle, offers}: MapProps): JSX.Element {
   const mapRef = useRef(null);
-  const map = useMap(mapRef);
+  const map = useMap(mapRef, offers);
 
   useEffect(() => {
     if (map) {
-      props.offers.forEach((offer) => {
+      offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
           lng: offer.location.longitude
@@ -42,16 +43,16 @@ function Map(props: MapProps): JSX.Element {
 
         marker
           .setIcon(
-            props.selectedCard !== undefined && offer.id === props.selectedCard && props.mapStyle === MapStyle.Main
+            selectedCard !== undefined && offer.id === selectedCard && mapStyle === MapStyle.Main
               ? currentCustomIcon
               : defaultCustomIcon
           )
           .addTo(map);
       });
     }
-  }, [map, props.offers, props.selectedCard, props.mapStyle]);
+  }, [map, offers, selectedCard, mapStyle]);
 
-  return <div className={props.mapStyle} ref={mapRef}></div>;
+  return <div className={mapStyle} ref={mapRef}></div>;
 }
 
-export default Map;
+export default memo(Map);

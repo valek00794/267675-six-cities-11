@@ -1,4 +1,4 @@
-import {Route, Routes} from 'react-router-dom';
+import {Route, Routes, Navigate} from 'react-router-dom';
 
 import Main from '../../pages/main/main';
 import Login from '../../pages/login/login';
@@ -9,13 +9,17 @@ import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import PrivateRoute from '../private-route/private-route';
 import Header from '../../components/header/header';
 
-import {useAppSelector} from '../../hooks';
+import {AppRoute, defaultCityCoordinates} from '../../consts';
 
-import {AppRoute, AuthorizationStatus} from '../../consts';
+import {useAppSelector} from '../../hooks';
+import {getAuthorizationStatus, getAuthCheckedStatus} from '../../store/user-process/selectors';
+import {getOffersDataLoadingStatus} from '../../store/app-data/selectors';
 
 function App(): JSX.Element {
-  const {authStatus, isOffersDataLoading} = useAppSelector((state) => state);
-  if (isOffersDataLoading || authStatus === AuthorizationStatus.Unknown) {
+  const authStatus = useAppSelector(getAuthorizationStatus);
+  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
+  const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
+  if (isOffersDataLoading || !isAuthChecked) {
     return (
       <>
         <Header />
@@ -26,16 +30,17 @@ function App(): JSX.Element {
   }
   return (
     <Routes>
-      <Route path={AppRoute.Main} element={<Header />} >
-        <Route index element={<Main />} />
+      <Route path={AppRoute.Default} element={<Header />} >
+        <Route path={AppRoute.Default} element={<Navigate to={`/${defaultCityCoordinates.name}`} />} />
+        <Route path={AppRoute.Main} element={<Main />} />
+        <Route path={AppRoute.Error} element={<NotFound />} />
+        <Route path={AppRoute.Room} element={<Room />} />
         <Route path={AppRoute.Favorites} element={
           <PrivateRoute authorizationStatus={authStatus}>
             <Favorites />
           </PrivateRoute>
         }
         />
-        <Route path={AppRoute.Room} element={<Room />} />
-        <Route path={AppRoute.Error} element={<NotFound />} />
       </Route>
       <Route path={AppRoute.Login} element={<Login />} />
     </Routes>

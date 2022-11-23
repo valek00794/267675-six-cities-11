@@ -1,3 +1,5 @@
+import {memo} from 'react';
+
 import Footer from '../../components/footer/footer';
 
 import './loading-style.css';
@@ -13,4 +15,4 @@ function LoadingScreen(): JSX.Element {
   );
 }
 
-export default LoadingScreen;
+export default memo(LoadingScreen);

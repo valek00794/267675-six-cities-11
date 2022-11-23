@@ -1,8 +1,9 @@
 export enum AppRoute {
+  Default = '/',
   Login = '/login',
-  Main = '/',
+  Main = '/:city',
   Favorites = '/favorites',
-  Room = '/offer/:id',
+  Room = '/:city/offer/:id',
   Error = '*',
 }
 
@@ -32,6 +33,12 @@ export enum APIRoute {
   Logout = '/logout',
 }
 
+export enum NameSpace {
+  Data = 'DATA',
+  App = 'APP',
+  User = 'USER',
+}
+
 export const cities = [
   'Paris',
   'Cologne',
@@ -39,7 +46,7 @@ export const cities = [
   'Amsterdam',
   'Hamburg',
   'Dusseldorf'
-] as const;
+];
 
 export const defaultCityCoordinates = {
   'name': 'Paris',
@@ -49,4 +56,3 @@ export const defaultCityCoordinates = {
     'zoom': 13
   },
 } as const;
-

@@ -6,8 +6,8 @@ import {AuthData} from '../../types/auth-data';
 import {useAppDispatch} from '../../hooks';
 import {loginAction} from '../../store/api-actions';
 
-
 function Login(): JSX.Element {
+
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
@@ -80,7 +80,7 @@ function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to="/">
+              <Link className="locations__item-link" to="/Amsterdam">
                 <span>Amsterdam</span>
               </Link>
             </div>

@@ -1,46 +1,42 @@
-import { useParams } from 'react-router';
-import {useEffect, useState} from 'react';
+import {useParams} from 'react-router';
+import {useEffect} from 'react';
 
-import RoomReview from './room-review/room-review';
-import Map from '../../components/map/map';
-import PlaceCard from '../../components/place-card/place-card';
+import RoomReviews from '../../components/room/room-review/room-reviews';
 import NotFound from '../../pages/not-found/not-found';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import NearbyBlock from '../../components/room/nearby-blok/nearby-block';
 
-import {MapStyle, AuthorizationStatus} from '../../consts';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 
-import {fetchOfferAction, fetchCommentsAction, fetchNearbyOffersAction} from '../../store/api-actions';
+import {fetchOfferAction, fetchNearbyOffersAction, fetchCommentsAction} from '../../store/api-actions';
+import {getAuthCheckedStatus} from '../../store/user-process/selectors';
+import {getOffersDataLoadingStatus, getOfferDataLoadingStatus, getServerOffers, getOffer} from '../../store/app-data/selectors';
 
 function Room(): JSX.Element {
-  const {
-    serverOffer,
-    serverOffers,
-    serverNearbyOffers,
-    authStatus,
-    isOfferDataLoading,
-    isNearbyOffersDataLoading
-  } = useAppSelector((state) => state);
-  const [selectedCard, setActiveCard] = useState(0);
+  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
+  const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
+  const isOfferDataLoading = useAppSelector(getOfferDataLoadingStatus);
+  const serverOffers = useAppSelector(getServerOffers);
+  const serverOffer = useAppSelector(getOffer);
   const {id} = useParams();
   const availableOffersIDs = [...new Set(serverOffers.map((offer) => offer.id.toString()))];
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchOfferAction(id));
-    dispatch(fetchCommentsAction(id));
     dispatch(fetchNearbyOffersAction(id));
+    dispatch(fetchCommentsAction(id));
     window.scrollTo(0, 0);
-  }, [dispatch, id]);
-
-  if (isOfferDataLoading || authStatus === AuthorizationStatus.Unknown) {
-    return (
-      <LoadingScreen />
-    );
-  }
+  }, [id]);
 
   if (id && !availableOffersIDs.includes(id)) {
     return <NotFound />;
+  }
+
+  if (isOfferDataLoading || isOffersDataLoading || !isAuthChecked) {
+    return (
+      <LoadingScreen />
+    );
   }
 
   return (
@@ -119,32 +115,11 @@ function Room(): JSX.Element {
                 </p>
               </div>
             </div>
-            <RoomReview id={id}/>
+            <RoomReviews />
           </div>
         </div>
-        <section className="property__map map">
-          {!isNearbyOffersDataLoading &&
-          <Map
-            offers={serverNearbyOffers}
-            selectedCard={selectedCard}
-            mapStyle={MapStyle.Room}
-          />}
-        </section>
       </section>
-      <div className="container">
-        <section className="near-places places">
-          <h2 className="near-places__title">Other places in the neighbourhood</h2>
-          <div className="near-places__list places__list">
-            {!isNearbyOffersDataLoading && serverNearbyOffers.map((offer) => (
-              <PlaceCard
-                setActiveCard={setActiveCard}
-                key={offer.id}
-                offer={offer}
-              />
-            ))}
-          </div>
-        </section>
-      </div>
+      <NearbyBlock />
     </main>
   );
 }

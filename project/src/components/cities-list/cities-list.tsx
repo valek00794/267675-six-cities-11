@@ -1,52 +1,44 @@
 import {Link} from 'react-router-dom';
-import {useEffect} from 'react';
 import classnames from 'classnames';
-
-import {useAppSelector, useAppDispatch} from '../../hooks';
-import {changeSelectedCityAction, pickOffersByCityAction} from '../../store/action';
+import {memo} from 'react';
+import {useParams} from 'react-router';
 
 import {cities, SortType} from '../../consts';
 
 type CitiesListProp = {
   sortRef: React.MutableRefObject<SortType>;
-  sortUlState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
+  setUlState: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function CitiesList(props: CitiesListProp): JSX.Element {
-  const dispatch = useAppDispatch();
-  const selectedCity = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.serverOffers);
-  const [, setUlState] = props.sortUlState;
-  const getLinkClassName = (city : string) =>
+function CitiesList({sortRef, setUlState}: CitiesListProp): JSX.Element {
+  const {city} = useParams();
+
+  const getLinkClassName = (linkCity : string) =>
     classnames(
       'locations__item-link tabs__item',
-      {'tabs__item--active': city === selectedCity}
+      {'tabs__item--active': linkCity === city}
     );
 
-  useEffect(() => {
-    dispatch(pickOffersByCityAction(offers, selectedCity));
-  }, [dispatch, selectedCity, offers]);
+  const sortReset = () => {
+    sortRef.current = SortType.Popular;
+    setUlState(false);
+  };
 
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {cities.map((city) => (
+          {cities.map((el) => (
             <li
-              key={city}
+              key={el}
               className="locations__item"
             >
               <Link
-                className={getLinkClassName(city)}
-                to='#'
-                onClick={() => {
-                  dispatch(changeSelectedCityAction(city));
-                  dispatch(pickOffersByCityAction(offers, city));
-                  props.sortRef.current = SortType.Popular;
-                  setUlState(false);
-                }}
+                className={getLinkClassName(el)}
+                to={`/${el}`}
+                onClick={sortReset}
               >
-                <span>{city}</span>
+                <span>{el}</span>
               </Link>
             </li>
           )
@@ -57,4 +49,4 @@ function CitiesList(props: CitiesListProp): JSX.Element {
   );
 }
 
-export default CitiesList;
+export default memo(CitiesList);

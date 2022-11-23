@@ -1,13 +1,15 @@
 import {Link, Outlet} from 'react-router-dom';
+import {memo} from 'react';
 
 import HeaderAuth from './header-auth';
 import HeaderNoAuth from './header-no-auth';
 
 import {useAppSelector} from '../../hooks';
 import {AuthorizationStatus} from '../../consts';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
 
 function Header(): JSX.Element {
-  const {isOffersDataLoading, isOfferDataLoading, authStatus} = useAppSelector((state) => state);
+  const authStatus = useAppSelector(getAuthorizationStatus);
   return (
     <>
       <header className="header">
@@ -18,15 +20,14 @@ function Header(): JSX.Element {
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
               </Link>
             </div>
-            {!isOffersDataLoading && !isOfferDataLoading &&
             <nav className="header__nav">
               <ul className="header__nav-list">
                 {authStatus === AuthorizationStatus.Auth &&
                   <HeaderAuth />}
                 {authStatus !== AuthorizationStatus.Auth &&
-                  <HeaderNoAuth />}
+                <HeaderNoAuth />}
               </ul>
-            </nav>}
+            </nav>
           </div>
         </div>
       </header>
@@ -36,4 +37,4 @@ function Header(): JSX.Element {
   );
 }
 
-export default Header;
+export default memo(Header);
