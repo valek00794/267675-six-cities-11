@@ -16,7 +16,7 @@ import {useAppSelector, useAppDispatch} from '../../hooks';
 import {getAuthorizationStatus, getAuthCheckedStatus} from '../../store/user-process/selectors';
 import {getOffersDataLoadingStatus} from '../../store/app-data/selectors';
 
-import {fetchOffersAction, fetchFavoriteOffersAction} from '../../store/api-actions';
+import {fetchOffersAction} from '../../store/api-actions';
 
 function App(): JSX.Element {
   const authStatus = useAppSelector(getAuthorizationStatus);
@@ -26,7 +26,6 @@ function App(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchOffersAction());
-    dispatch(fetchFavoriteOffersAction());
   }, []);
 
   if (isOffersDataLoading || !isAuthChecked) {

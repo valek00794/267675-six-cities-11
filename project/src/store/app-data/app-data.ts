@@ -58,6 +58,7 @@ const initialState: AppData = {
   isCommentPostStatus: false,
   isCommentSubmitSuccessful: false,
   isFavoriteOffersDataLoading: false,
+  isFavoriteOffersPostStatus: false,
 };
 
 export const appData = createSlice({
@@ -112,6 +113,9 @@ export const appData = createSlice({
         state.favoriteOffers = action.payload;
         state.isFavoriteOffersDataLoading = false;
       })
+      .addCase(fetchPostOfferFavoriteStatusAction.pending, (state) => {
+        state.isFavoriteOffersPostStatus = true;
+      })
       .addCase(fetchPostOfferFavoriteStatusAction.fulfilled, (state, action) => {
         const updateOffers = () => state.offers.map((item) => {
           if (item.id !== action.payload.id) {
@@ -122,7 +126,19 @@ export const appData = createSlice({
             ...action.payload
           };
         });
+        const updateNearbyOffers = () => state.nearbyOffers.map((item) => {
+          if (item.id !== action.payload.id) {
+            return item;
+          }
+          return {
+            ...item,
+            ...action.payload
+          };
+        });
         state.offers = updateOffers();
+        state.roomInfo.isFavorite = action.payload.isFavorite;
+        state.nearbyOffers = updateNearbyOffers();
+        state.isFavoriteOffersPostStatus = false;
       });
   }
 });

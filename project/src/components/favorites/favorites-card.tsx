@@ -1,13 +1,15 @@
 import {Link} from 'react-router-dom';
 
-import {Offer} from '../../types/offers';
+import useFavorite from '../../hooks/useFavorite';
 
+import {Offer} from '../../types/offers';
 
 type FavoritesCardProps = {
   offer: Offer;
 }
 
-function FavoritesCard({ offer }: FavoritesCardProps): JSX.Element {
+function FavoritesCard({offer}: FavoritesCardProps): JSX.Element {
+  const hadleFavorite = useFavorite(offer);
   return (
     <article className="favorites__card place-card">
       {offer.isPremium &&
@@ -15,7 +17,7 @@ function FavoritesCard({ offer }: FavoritesCardProps): JSX.Element {
           <span>Premium</span>
         </div>}
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <Link to={`/offer/${offer.id}`}>
+        <Link to={`/${offer.city.name}/offer/${offer.id}`}>
           <img className="place-card__image" src={offer.previewImage} width="150" height="110" alt="Place image"/>
         </Link>
       </div>
@@ -25,7 +27,11 @@ function FavoritesCard({ offer }: FavoritesCardProps): JSX.Element {
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
+          <button
+            className="place-card__bookmark-button place-card__bookmark-button--active button"
+            type="button"
+            onClick={hadleFavorite}
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -39,7 +45,7 @@ function FavoritesCard({ offer }: FavoritesCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
+          <Link to={`/${offer.city.name}/offer/${offer.id}`}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

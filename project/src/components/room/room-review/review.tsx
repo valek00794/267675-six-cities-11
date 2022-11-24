@@ -5,6 +5,10 @@ type ReviewProps = {
 }
 
 function Review(comment: ReviewProps): JSX.Element {
+  const getFormatDate = (date : string) => new Date(date).toLocaleDateString('en-EN', {
+    month: 'long',
+    year: 'numeric',
+  });
   return (
     <>
       <div className="reviews__user user">
@@ -25,7 +29,7 @@ function Review(comment: ReviewProps): JSX.Element {
         <p className="reviews__text">
           {comment.comment.comment}
         </p>
-        <time className="reviews__time" dateTime={comment.comment.date}>{comment.comment.date}</time>
+        <time className="reviews__time" dateTime={comment.comment.date}>{getFormatDate(comment.comment.date)}</time>
       </div>
     </>
   );

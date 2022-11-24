@@ -1,13 +1,10 @@
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import classnames from 'classnames';
 import {useParams} from 'react-router';
 
 import {Offer} from '../../types/offers';
 
-import {fetchPostOfferFavoriteStatusAction} from '../../store/api-actions';
-import {checkAuthStatus} from '../../store/user-process/selectors';
-import {AppRoute, FavoriteStatus} from '../../consts';
-import {useAppSelector, useAppDispatch} from '../../hooks';
+import useFavorite from '../../hooks/useFavorite';
 
 type PlaceCardProps = {
   offer: Offer;
@@ -16,23 +13,13 @@ type PlaceCardProps = {
 
 function PlaceCard({offer, setActiveCard}: PlaceCardProps): JSX.Element {
   const {city} = useParams();
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const isAuthChecked = useAppSelector(checkAuthStatus);
+  const handleFavorite = useFavorite(offer);
 
   const getFavoriteButtonClassName = () =>
     classnames(
       'place-card__bookmark-button button',
       {'place-card__bookmark-button--active': offer.isFavorite}
     );
-
-  const handleFavorite = () => {
-    if (!isAuthChecked) {
-      navigate(AppRoute.Login);
-    } else {
-      dispatch(fetchPostOfferFavoriteStatusAction([String(offer.id), offer.isFavorite ? FavoriteStatus.Del : FavoriteStatus.Add]));
-    }
-  };
 
   return (
     <article

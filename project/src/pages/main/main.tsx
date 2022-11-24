@@ -14,7 +14,6 @@ import {cities, SortType, MapStyle} from '../../consts';
 
 import {getSortOffers} from '../../store/app-data/selectors';
 
-
 function Main(): JSX.Element {
   const [selectedCard, setActiveCard] = useState(0);
   const sortRef = useRef(SortType.Popular);
@@ -27,13 +26,14 @@ function Main(): JSX.Element {
     return <NotFound />;
   }
 
+  const getMainBlockClassName = () => classnames(
+    'page__main page__main--index',
+    {'page__main--index-empty': offers.length === 0}
+  );
+
   return (
     <div className="page page--gray page--main">
-      <main className={classnames(
-        'page__main page__main--index',
-        {'page__main--index-empty': offers.length === 0}
-      )}
-      >
+      <main className={getMainBlockClassName()}>
         <h1 className="visually-hidden">Cities</h1>
         <CitiesList sortRef={sortRef} setUlState={setUlState} />
         <div className="cities">

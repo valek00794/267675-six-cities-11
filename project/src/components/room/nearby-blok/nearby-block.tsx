@@ -11,7 +11,7 @@ import {getNearbyOffers, getNearbyOffersDataLoadingStatus} from '../../../store/
 
 
 function NearbyBlock(): JSX.Element {
-  const serverNearbyOffers = useAppSelector(getNearbyOffers);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
   const isNearbyOffersDataLoading = useAppSelector(getNearbyOffersDataLoadingStatus);
 
   if (isNearbyOffersDataLoading) {
@@ -30,7 +30,7 @@ function NearbyBlock(): JSX.Element {
     <>
       <section className="property__map map">
         <Map
-          offers={serverNearbyOffers}
+          offers={nearbyOffers}
           mapStyle={MapStyle.Room}
         />
       </section>

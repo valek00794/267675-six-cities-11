@@ -1,14 +1,26 @@
 import {Link} from 'react-router-dom';
+import {useEffect} from 'react';
 
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {logoutAction} from '../../store/api-actions';
-import {getFavoriteOffersCount} from '../../store/app-data/selectors';
+import {fetchOffersAction, logoutAction} from '../../store/api-actions';
+import {getFavoriteOffersCount, getFavoriteOffersPostStatus} from '../../store/app-data/selectors';
 import {getAuthUser} from '../../store/user-process/selectors';
+import {fetchFavoriteOffersAction} from '../../store/api-actions';
 
 function HeaderAuth(): JSX.Element {
   const dispatch = useAppDispatch();
   const authUser = useAppSelector(getAuthUser);
+  const isFavoriteOffersPostStatus = useAppSelector(getFavoriteOffersPostStatus);
   const favoriteOffersCount = useAppSelector(getFavoriteOffersCount);
+  const signOut = () => {
+    dispatch(logoutAction());
+    dispatch(fetchOffersAction());
+  };
+  useEffect(() => {
+    if (!isFavoriteOffersPostStatus) {
+      dispatch(fetchFavoriteOffersAction());
+    }
+  }, [isFavoriteOffersPostStatus]);
 
   return (
     <>
@@ -24,9 +36,7 @@ function HeaderAuth(): JSX.Element {
         <Link
           className="header__nav-link"
           to="/"
-          onClick={() => {
-            dispatch(logoutAction());
-          }}
+          onClick={signOut}
         >
           <span className="header__signout">Sign out</span>
         </Link>
