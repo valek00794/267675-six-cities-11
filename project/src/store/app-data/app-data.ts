@@ -3,7 +3,7 @@ import {createSlice} from '@reduxjs/toolkit';
 import {NameSpace} from '../../consts';
 import {AppData} from '../../types/state';
 import {
-  fetchOfferAction,
+  fetchRoomInfoAction,
   fetchOffersAction,
   fetchCommentsAction,
   fetchNearbyOffersAction,
@@ -14,7 +14,7 @@ import {
 
 const initialState: AppData = {
   offers: [],
-  offer: {
+  roomInfo: {
     bedrooms: 0,
     description: 'string',
     goods: ['string'],
@@ -52,7 +52,7 @@ const initialState: AppData = {
   nearbyOffers: [],
   favoriteOffers: [],
   isOffersDataLoading: false,
-  isOfferDataLoading: false,
+  isRoomInfoDataLoading: false,
   isCommentsDataLoading: false,
   isNearbyOffersDataLoading: false,
   isCommentPostStatus: false,
@@ -73,12 +73,12 @@ export const appData = createSlice({
         state.offers = action.payload;
         state.isOffersDataLoading = false;
       })
-      .addCase(fetchOfferAction.pending, (state) => {
-        state.isOfferDataLoading = true;
+      .addCase(fetchRoomInfoAction.pending, (state) => {
+        state.isRoomInfoDataLoading = true;
       })
-      .addCase(fetchOfferAction.fulfilled, (state, action) => {
-        state.offer = action.payload;
-        state.isOfferDataLoading = false;
+      .addCase(fetchRoomInfoAction.fulfilled, (state, action) => {
+        state.roomInfo = action.payload;
+        state.isRoomInfoDataLoading = false;
       })
       .addCase(fetchCommentsAction.pending, (state) => {
         state.isCommentsDataLoading = true;

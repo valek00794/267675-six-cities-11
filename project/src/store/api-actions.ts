@@ -29,7 +29,7 @@ export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
   },
 );
 
-export const fetchOfferAction = createAsyncThunk<Offer, string | undefined, {
+export const fetchRoomInfoAction = createAsyncThunk<Offer, string | undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
