@@ -1,22 +1,13 @@
 import {useRef, FormEvent} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import {AuthData} from '../../types/auth-data';
 
-import {useAppSelector, useAppDispatch} from '../../hooks';
 import {loginAction} from '../../store/api-actions';
-import {getAuthorization} from '../../store/user-process/selectors';
-import {AppRoute} from '../../consts';
+import {useAppDispatch} from '../../hooks';
 
 function Login(): JSX.Element {
-  /*const isAuthorization = useAppSelector(getAuthorization);
 
-  const navigate = useNavigate();
-
-  if (isAuthorization) {
-    navigate(AppRoute.Default);
-  }
-*/
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 

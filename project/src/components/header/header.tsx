@@ -5,11 +5,10 @@ import HeaderAuth from './header-auth';
 import HeaderNoAuth from './header-no-auth';
 
 import {useAppSelector} from '../../hooks';
-import {AuthorizationStatus} from '../../consts';
-import {getAuthorizationStatus} from '../../store/user-process/selectors';
+import {getAuthorization} from '../../store/user-process/selectors';
 
 function Header(): JSX.Element {
-  const authStatus = useAppSelector(getAuthorizationStatus);
+  const authStatus = useAppSelector(getAuthorization);
   return (
     <>
       <header className="header">
@@ -22,9 +21,9 @@ function Header(): JSX.Element {
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
-                {authStatus === AuthorizationStatus.Auth &&
+                {authStatus &&
                   <HeaderAuth />}
-                {authStatus !== AuthorizationStatus.Auth &&
+                {!authStatus &&
                 <HeaderNoAuth />}
               </ul>
             </nav>
