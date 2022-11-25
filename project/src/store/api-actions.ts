@@ -34,7 +34,7 @@ export const fetchRoomInfoAction = createAsyncThunk<Offer, string | undefined, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchOffer',
+  'data/fetchRoomInfo',
   async (id, {extra: api}) => {
     // eslint академии ошибочно выдает предупреждение здесь и далее в файле
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
