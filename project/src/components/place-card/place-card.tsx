@@ -13,8 +13,6 @@ type PlaceCardProps = {
 
 function PlaceCard({offer, setActiveCard}: PlaceCardProps): JSX.Element {
   const {city} = useParams();
-  const handleFavorite = useFavorite(offer);
-
   const getFavoriteButtonClassName = () =>
     classnames(
       'place-card__bookmark-button button',
@@ -44,7 +42,7 @@ function PlaceCard({offer, setActiveCard}: PlaceCardProps): JSX.Element {
           <button
             className={getFavoriteButtonClassName()}
             type="button"
-            onClick={() => handleFavorite()}
+            onClick={useFavorite(offer)}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
