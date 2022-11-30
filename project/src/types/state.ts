@@ -1,20 +1,22 @@
 import {store} from '../store/index';
 import {AuthorizationStatus} from '../consts';
-import { Offer } from './offers';
-import { Comment } from './comment';
+import {Offer} from './offers';
+import {Comment} from './comment';
 
 export type AppData = {
-  serverOffers: Offer[];
   offers: Offer[];
-  serverOffer: Offer;
-  serverComments: Comment[];
-  serverNearbyOffers: Offer[];
+  roomInfo: Offer;
+  comments: Comment[];
+  nearbyOffers: Offer[];
+  favoriteOffers: Offer[];
   isOffersDataLoading: boolean;
-  isOfferDataLoading: boolean;
+  isRoomInfoDataLoading: boolean;
   isCommentsDataLoading: boolean;
   isNearbyOffersDataLoading: boolean;
+  isFavoriteOffersDataLoading: boolean;
   isCommentPostStatus: boolean;
   isCommentSubmitSuccessful: boolean;
+  isFavoriteOffersPostStatus: boolean;
 };
 
 export type UserProcess = {

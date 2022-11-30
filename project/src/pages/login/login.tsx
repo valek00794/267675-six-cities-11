@@ -1,13 +1,22 @@
-import {useRef, FormEvent} from 'react';
-import {Link} from 'react-router-dom';
+import {useRef, FormEvent, useEffect} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 
 import {AuthData} from '../../types/auth-data';
 
-import {useAppDispatch} from '../../hooks';
 import {loginAction} from '../../store/api-actions';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {getAuthorization} from '../../store/user-process/selectors';
+import {cities} from '../../consts';
 
 function Login(): JSX.Element {
+  const navigate = useNavigate();
+  const isAuthorization = useAppSelector(getAuthorization);
 
+  useEffect(() => {
+    if (isAuthorization){
+      navigate('/');
+    }
+  }, []);
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
@@ -25,6 +34,15 @@ function Login(): JSX.Element {
         password: passwordRef.current.value,
       });
     }
+  };
+
+  const getRandomShowCityLink = () => {
+    const city = cities[Math.floor(Math.random() * cities.length)];
+    return (
+      <Link className="locations__item-link" to={`/${city}`}>
+        <span>{city}</span>
+      </Link>
+    );
   };
 
   return (
@@ -80,9 +98,7 @@ function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to="/Amsterdam">
-                <span>Amsterdam</span>
-              </Link>
+              {getRandomShowCityLink()}
             </div>
           </section>
         </div>

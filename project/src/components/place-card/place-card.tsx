@@ -4,6 +4,7 @@ import {useParams} from 'react-router';
 
 import {Offer} from '../../types/offers';
 
+import useFavorite from '../../hooks/useFavorite';
 
 type PlaceCardProps = {
   offer: Offer;
@@ -41,6 +42,7 @@ function PlaceCard({offer, setActiveCard}: PlaceCardProps): JSX.Element {
           <button
             className={getFavoriteButtonClassName()}
             type="button"
+            onClick={useFavorite(offer)}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>

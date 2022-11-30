@@ -1,12 +1,17 @@
+/* eslint-disable no-console */
 import {useRef, useEffect} from 'react';
 import {Icon, Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {memo} from 'react';
+import {useParams} from 'react-router-dom';
 
 import useMap from '../../hooks/useMap';
+import {useAppSelector} from '../../hooks';
 
 import {MapStyle} from '../../consts';
 import {Offer} from '../../types/offers';
+import {getRoomInfo} from '../../store/app-data/selectors';
+
 
 const URL_MARKER_DEFAULT = '../../img/pin.svg';
 const URL_MARKER_CURRENT = '../../img/pin-active.svg';
@@ -32,6 +37,8 @@ const currentCustomIcon = new Icon({
 function Map({selectedCard, mapStyle, offers}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, offers);
+  const {id} = useParams();
+  const roomInfo = useAppSelector(getRoomInfo);
 
   useEffect(() => {
     if (map) {
@@ -49,6 +56,21 @@ function Map({selectedCard, mapStyle, offers}: MapProps): JSX.Element {
           )
           .addTo(map);
       });
+      if (roomInfo && id) {
+        const markerRoomInfo = new Marker({
+          lat: roomInfo.location.latitude,
+          lng: roomInfo.location.longitude
+        });
+
+        markerRoomInfo
+          .setIcon(
+            id && String(roomInfo.id) === id
+              ? currentCustomIcon
+              : defaultCustomIcon
+          )
+          .addTo(map);
+      }
+
     }
   }, [map, offers, selectedCard, mapStyle]);
 

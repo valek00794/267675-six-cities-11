@@ -8,6 +8,7 @@ import {saveToken, dropToken} from '../services/token';
 import {
   APIRoute,
   AppRoute,
+  //FavoriteStatus
 } from '../consts';
 
 import {AppDispatch, State} from '../types/state.js';
@@ -28,12 +29,12 @@ export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
   },
 );
 
-export const fetchOfferAction = createAsyncThunk<Offer, string | undefined, {
+export const fetchRoomInfoAction = createAsyncThunk<Offer, string | undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchOffer',
+  'data/fetchRoomInfo',
   async (id, {extra: api}) => {
     // eslint академии ошибочно выдает предупреждение здесь и далее в файле
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
@@ -61,7 +62,7 @@ export const fetchPostCommentAction = createAsyncThunk<Comment[], [NewComment, s
   extra: AxiosInstance;
 }>(
   'data/addComment',
-  async ([{comment, rating}, id], {dispatch, extra: api}) => {
+  async ([{comment, rating}, id], {extra: api}) => {
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const {data} = await api.post<Comment[]>(APIRoute.Comments + id, {comment, rating});
     return data;
@@ -77,6 +78,32 @@ export const fetchNearbyOffersAction = createAsyncThunk<Offer[], string | undefi
   async (id, {extra: api}) => {
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const {data} = await api.get<Offer[]>(APIRoute.Offers + id + APIRoute.NearbyOffers);
+    return data;
+  },
+);
+
+export const fetchFavoriteOffersAction = createAsyncThunk<Offer[], undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchFavoriteOffers',
+  async (_arg, {extra: api}) => {
+    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+    const {data} = await api.get<Offer[]>(APIRoute.Favorite);
+    return data;
+  },
+);
+
+export const fetchPostOfferFavoriteStatusAction = createAsyncThunk<Offer, [string | undefined, string | undefined], {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/changeOfferFavoriteStatus',
+  async ([id, status], {extra: api}) => {
+    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+    const {data} = await api.post<Offer>(APIRoute.Favorite + id + status);
     return data;
   },
 );
