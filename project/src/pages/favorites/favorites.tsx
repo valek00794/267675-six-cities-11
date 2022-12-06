@@ -10,7 +10,7 @@ import {getFavoriteOffers} from '../../store/app-data/selectors';
 
 function Favorites(): JSX.Element {
   const favoriteOffers = useAppSelector(getFavoriteOffers);
-  const citiesFavoriteOffers = new Set(favoriteOffers.map((offer) => offer.city.name));
+  const citiesFavoriteOffers = new Set(favoriteOffers?.map((offer) => offer.city.name));
 
   return (
     <>
