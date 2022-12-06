@@ -2,7 +2,7 @@ import {lorem, datatype, address, image, internet} from 'faker';
 import {Offer} from '../types/offers';
 import {Comment, NewComment} from '../types/comment';
 
-const makeFakeRoomInfo = (id: number): Offer => ({
+export const makeFakeRoomInfo = (id: number): Offer => ({
   bedrooms: datatype.number(10),
   description: lorem.words(),
   goods: datatype.array(datatype.number(10)),
@@ -44,16 +44,16 @@ export const makeFakeOffers = (): Offer[] => {
   for (let i = 0; i < datatype.number(10); i++) {
     offers.push(makeFakeRoomInfo(i));
   }
-  //offers.push(fakeRoomInfo);
+  offers.push(fakeRoomInfo);
   return offers;
 };
 
 export const makeFakeNearbyOffers = (): Offer[] => {
   const nearbyoffers : Offer[] = [];
-  for (let i = 0; i < datatype.number(3); i++) {
+  for (let i = 0; i < datatype.number(2); i++) {
     nearbyoffers.push(makeFakeRoomInfo(i));
   }
-  //nearbyoffers.push(fakeRoomInfo);
+  nearbyoffers.push(fakeRoomInfo);
   return nearbyoffers;
 };
 
@@ -89,6 +89,7 @@ export const makeFakeComments = (): Comment[] => {
   for (let i = 0; i < datatype.number(10); i++) {
     comments.push(makeFakeComment(i));
   }
+  comments.push(makeFakeComment(fakeRoomInfo.id));
   return comments;
 };
 
