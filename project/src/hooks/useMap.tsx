@@ -4,7 +4,7 @@ import {useParams} from 'react-router';
 
 import {City} from '../types/offers';
 import {Offer} from '../types/offers';
-import {defaultCityCoordinates} from '../consts';
+import {defaultCityInfo} from '../consts';
 
 
 function useMap(
@@ -14,7 +14,7 @@ function useMap(
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef(false);
   const {city} = useParams();
-  const cityCoordinates : City = offers?.find((offer) => city === offer.city.name)?.city || defaultCityCoordinates;
+  const cityCoordinates : City = offers?.find((offer) => city === offer.city.name)?.city || defaultCityInfo;
 
   useEffect(() => {
     if (mapRef.current !== null && !isRenderedRef.current) {
