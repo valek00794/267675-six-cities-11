@@ -8,7 +8,7 @@ function LoadingScreen(): JSX.Element {
   return (
     <>
       <div className='loading'>
-        <div></div>
+        <div>Loading</div>
       </div>
       <Footer />
     </>

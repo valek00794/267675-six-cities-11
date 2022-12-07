@@ -72,7 +72,7 @@ function Room(): JSX.Element {
               <button
                 className={getFavoriteButtonClassName()}
                 type="button"
-                onClick={() => handleFavorite()}
+                onClick={handleFavorite}
               >
                 <svg className="place-card__bookmark-icon" width="31" height="33">
                   <use xlinkHref="#icon-bookmark"></use>

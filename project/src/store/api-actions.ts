@@ -8,7 +8,6 @@ import {saveToken, dropToken} from '../services/token';
 import {
   APIRoute,
   AppRoute,
-  //FavoriteStatus
 } from '../consts';
 
 import {AppDispatch, State} from '../types/state.js';
