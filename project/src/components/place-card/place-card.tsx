@@ -21,6 +21,7 @@ function PlaceCard({offer, setActiveCard}: PlaceCardProps): JSX.Element {
     <article
       onMouseOver={() => {setActiveCard && setActiveCard(offer.id);}}
       className="cities__card place-card"
+      data-testid="card-article"
     >
       {offer.isPremium &&
         <div className="place-card__mark">
@@ -41,6 +42,7 @@ function PlaceCard({offer, setActiveCard}: PlaceCardProps): JSX.Element {
             className={getFavoriteButtonClassName()}
             type="button"
             onClick={useFavorite(offer)}
+            data-testid="to-bookmarks"
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
