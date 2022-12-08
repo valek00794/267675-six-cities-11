@@ -12,17 +12,15 @@ import NotFound from '../../pages/not-found/not-found';
 import {useAppSelector} from '../../hooks';
 import {cities, SortType, MapStyle} from '../../consts';
 
-import {getSortOffers, getOffers} from '../../store/app-data/selectors';
+import {getSortOffers} from '../../store/app-data/selectors';
 
 function Main(): JSX.Element {
   const [selectedCard, setActiveCard] = useState(0);
   const sortRef = useRef(SortType.Popular);
   const [sortUlState, setUlState] = useState(false);
   const {city} = useParams();
-  //const offers = useAppSelector((state) => getSortOffers(state, city, sortRef.current));
-  const offers = useAppSelector(getOffers);
-  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-  const getPlacesHeader = () => offers.length !== 0 ? `${offers.length} places to stay in ${city}` : `No places to stay available ${city}`;
+  const offers = useAppSelector((state) => getSortOffers(state, city, sortRef.current));
+  const getPlacesHeader = () => offers.length !== 0 && city ? `${offers.length} places to stay in ${city}` : 'No places to stay available';
 
   if (city && !cities.includes(city)) {
     return <NotFound />;

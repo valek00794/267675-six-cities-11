@@ -35,6 +35,7 @@ function Sort({sort, sortRef, sortUlState, setUlState} : SortProp): JSX.Element 
           'places__options places__options--custom',
           {'places__options--opened': sortUlState}
         )}
+        data-testid="ul-sort"
       >
         {(Object.keys(SortType) as Array<keyof typeof SortType>).map((type) => (
           <li
@@ -47,6 +48,7 @@ function Sort({sort, sortRef, sortUlState, setUlState} : SortProp): JSX.Element 
                 setUlState(false);
               }
             }
+            data-testid="li-sort"
           >{SortType[type]}
           </li>
         ))}
