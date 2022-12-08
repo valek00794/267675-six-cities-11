@@ -29,7 +29,4 @@ describe('Hook: useMap', () => {
 
     expect(map).toBeInstanceOf(Map);
   });
-
-
-
 });
