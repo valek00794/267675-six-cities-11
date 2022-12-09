@@ -35,7 +35,7 @@ function Main(): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Helmet>
-        <title>6 cities  - best offers rental in {city}</title>
+        <title>{city && `6 cities  - best offers rental in ${city}`}</title>
       </Helmet>
       <main className={getMainBlockClassName()}>
         <h1 className="visually-hidden">Cities</h1>

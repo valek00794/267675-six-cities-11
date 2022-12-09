@@ -3,6 +3,7 @@ import {createMemoryHistory} from 'history';
 import {Provider} from 'react-redux';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import thunk from 'redux-thunk';
+import {HelmetProvider} from 'react-helmet-async';
 
 import HistoryRouter from '../history-route/history-route';
 import App from './app';
@@ -32,11 +33,13 @@ const store = mockStore({
 const history = createMemoryHistory();
 
 const fakeApp = (
-  <Provider store={store}>
-    <HistoryRouter history={history}>
-      <App />
-    </HistoryRouter>
-  </Provider>
+  <HelmetProvider>
+    <Provider store={store}>
+      <HistoryRouter history={history}>
+        <App />
+      </HistoryRouter>
+    </Provider>
+  </HelmetProvider>
 );
 
 describe('Application Routing', () => {

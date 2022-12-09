@@ -5,6 +5,7 @@ import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import userEvent from '@testing-library/user-event';
 import {Route, Routes} from 'react-router-dom';
+import {HelmetProvider} from 'react-helmet-async';
 
 import HistoryRouter from '../../components/history-route/history-route';
 import Room from './room';
@@ -36,12 +37,13 @@ describe('Page: Room', () => {
     });
     window.scrollTo = jest.fn();
     render(
-      <Provider store={store}>
-        <HistoryRouter history={history}>
-          <Room />
-        </HistoryRouter>
-      </Provider>
-
+      <HelmetProvider>
+        <Provider store={store}>
+          <HistoryRouter history={history}>
+            <Room />
+          </HistoryRouter>
+        </Provider>
+      </HelmetProvider>
     );
     expect(screen.getByText(/What's inside/i)).toBeInTheDocument();
     expect(screen.getByText(/Meet the host/i)).toBeInTheDocument();
@@ -61,12 +63,13 @@ describe('Page: Room', () => {
     });
     window.scrollTo = jest.fn();
     render(
-      <Provider store={store}>
-        <HistoryRouter history={history}>
-          <Room />
-        </HistoryRouter>
-      </Provider>
-
+      <HelmetProvider>
+        <Provider store={store}>
+          <HistoryRouter history={history}>
+            <Room />
+          </HistoryRouter>
+        </Provider>
+      </HelmetProvider>
     );
     expect(screen.getByText(/Loading/i)).toBeInTheDocument();
   });
@@ -87,12 +90,13 @@ describe('Page: Room', () => {
     });
     window.scrollTo = jest.fn();
     render(
-      <Provider store={store}>
-        <HistoryRouter history={history}>
-          <Room />
-        </HistoryRouter>
-      </Provider>
-
+      <HelmetProvider>
+        <Provider store={store}>
+          <HistoryRouter history={history}>
+            <Room />
+          </HistoryRouter>
+        </Provider>
+      </HelmetProvider>
     );
     expect(screen.getByText(/What's inside/i)).toBeInTheDocument();
     expect(screen.getByText(/Meet the host/i)).toBeInTheDocument();
@@ -118,12 +122,13 @@ describe('Page: Room', () => {
     });
     window.scrollTo = jest.fn();
     render(
-      <Provider store={store}>
-        <HistoryRouter history={history}>
-          <Room />
-        </HistoryRouter>
-      </Provider>
-
+      <HelmetProvider>
+        <Provider store={store}>
+          <HistoryRouter history={history}>
+            <Room />
+          </HistoryRouter>
+        </Provider>
+      </HelmetProvider>
     );
     expect(screen.getByText(/What's inside/i)).toBeInTheDocument();
     expect(screen.getByText(/Meet the host/i)).toBeInTheDocument();
@@ -148,21 +153,22 @@ describe('Page: Room', () => {
     });
     window.scrollTo = jest.fn();
     render(
-      <Provider store={store}>
-        <HistoryRouter history={history}>
-          <Routes>
-            <Route
-              path='/'
-              element={<Room />}
-            />
-            <Route
-              path='/login'
-              element={<h1>This is login page</h1>}
-            />
-          </Routes>
-        </HistoryRouter>
-      </Provider>
-
+      <HelmetProvider>
+        <Provider store={store}>
+          <HistoryRouter history={history}>
+            <Routes>
+              <Route
+                path='/'
+                element={<Room />}
+              />
+              <Route
+                path='/login'
+                element={<h1>This is login page</h1>}
+              />
+            </Routes>
+          </HistoryRouter>
+        </Provider>
+      </HelmetProvider>
     );
     expect(screen.getByTestId('to-bookmarks')).toBeInTheDocument();
     await userEvent.click(screen.getByTestId('to-bookmarks'));
@@ -187,12 +193,13 @@ describe('Page: Room', () => {
     window.scrollTo = jest.fn();
     const fakeHandleFavorite = jest.fn();
     render(
-      <Provider store={store}>
-        <HistoryRouter history={history}>
-          <Room />
-        </HistoryRouter>
-      </Provider>
-
+      <HelmetProvider>
+        <Provider store={store}>
+          <HistoryRouter history={history}>
+            <Room />
+          </HistoryRouter>
+        </Provider>
+      </HelmetProvider>
     );
     expect(screen.getByTestId('to-bookmarks')).toBeInTheDocument();
     screen.getByTestId('to-bookmarks').onclick = fakeHandleFavorite;
