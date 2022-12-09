@@ -59,7 +59,7 @@ export const makeFakeNearbyOffers = (): Offer[] => {
 
 export const makeFakeFavoriteOffers = (): Offer[] => {
   const favoriteOffers : Offer[] = [];
-  for (let i = 0; i < datatype.number(5); i++) {
+  for (let i = 0; i < datatype.number({min: 1, max: 5}); i++) {
     favoriteOffers.push(makeFakeRoomInfo(i));
   }
   return favoriteOffers;
