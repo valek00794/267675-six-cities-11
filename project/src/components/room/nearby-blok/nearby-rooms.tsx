@@ -3,8 +3,8 @@ import {memo} from 'react';
 import PlaceCard from '../../place-card/place-card';
 
 import {useAppSelector} from '../../../hooks';
-import {getNearbyOffers} from '../../../store/app-data/selectors';
 
+import {getNearbyOffers} from '../../../store/app-data/selectors';
 
 function NearbyRooms(): JSX.Element {
   const nearbyOffers = useAppSelector(getNearbyOffers);

@@ -5,8 +5,8 @@ import {Provider} from 'react-redux';
 import {Map} from 'leaflet';
 
 import useMap from './useMap';
-import {makeFakeOffers} from '../utils/mocks';
 
+import {makeFakeOffers} from '../utils/mocks';
 
 const fakeOffers = makeFakeOffers();
 const mockStore = configureMockStore([thunk]);

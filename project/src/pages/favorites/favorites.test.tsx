@@ -7,6 +7,7 @@ import userEvent from '@testing-library/user-event';
 
 import HistoryRouter from '../../components/history-route/history-route';
 import Favorites from './favorites';
+
 import {makeFakeFavoriteOffers} from '../../utils/mocks';
 import {AuthorizationStatus} from '../../consts';
 

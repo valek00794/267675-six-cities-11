@@ -9,12 +9,11 @@ import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import NearbyBlock from '../../components/room/nearby-blok/nearby-block';
 
 import {useAppSelector, useAppDispatch} from '../../hooks';
+import useFavorite from '../../hooks/useFavorite';
 
 import {fetchRoomInfoAction, fetchCommentsAction, fetchNearbyOffersAction} from '../../store/api-actions';
 import {getAuthCheckedStatus} from '../../store/user-process/selectors';
 import {getOffersDataLoadingStatus, getRoomInfoDataLoadingStatus, getRoomInfo, getOffersIds} from '../../store/app-data/selectors';
-
-import useFavorite from '../../hooks/useFavorite';
 
 function Room(): JSX.Element {
   const isAuthChecked = useAppSelector(getAuthCheckedStatus);

@@ -2,6 +2,7 @@ import {Link} from 'react-router-dom';
 import {useEffect} from 'react';
 
 import {useAppDispatch, useAppSelector} from '../../hooks';
+
 import {fetchOffersAction, logoutAction} from '../../store/api-actions';
 import {getFavoriteOffersCount, getFavoriteOffersPostStatus} from '../../store/app-data/selectors';
 import {getAuthUser} from '../../store/user-process/selectors';

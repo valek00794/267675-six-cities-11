@@ -7,8 +7,9 @@ import thunk from 'redux-thunk';
 import {Route, Routes} from 'react-router-dom';
 
 import HistoryRouter from '../../components/history-route/history-route';
-import {AuthorizationStatus, defaultCityInfo} from '../../consts';
 import Login from './login';
+
+import {AuthorizationStatus, defaultCityInfo} from '../../consts';
 import {fakeRoomInfo, makeFakeOffers} from '../../utils/mocks';
 
 const mockStore = configureMockStore([thunk]);

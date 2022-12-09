@@ -6,8 +6,8 @@ import FavoriteCard from '../../components/favorites/favorites-card';
 import FavoriteEmpty from '../../components/favorites/favorites-empty';
 
 import {useAppSelector} from '../../hooks';
-import {getFavoriteOffers} from '../../store/app-data/selectors';
 
+import {getFavoriteOffers} from '../../store/app-data/selectors';
 
 function Favorites(): JSX.Element {
   const favoriteOffers = useAppSelector(getFavoriteOffers);

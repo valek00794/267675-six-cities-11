@@ -7,6 +7,7 @@ import {Route, Routes} from 'react-router-dom';
 
 import HistoryRouter from '../../components/history-route/history-route';
 import Main from './main';
+
 import {fakeRoomInfo, makeFakeOffers} from '../../utils/mocks';
 import {AuthorizationStatus, defaultCityInfo} from '../../consts';
 

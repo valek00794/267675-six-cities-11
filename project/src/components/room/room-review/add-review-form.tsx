@@ -1,10 +1,10 @@
 import {useForm, SubmitHandler} from 'react-hook-form';
 import {useEffect} from 'react';
-import { useParams } from 'react-router';
-
-import {NewComment} from '../../../types/comment';
+import {useParams} from 'react-router';
 
 import {useAppDispatch, useAppSelector} from '../../../hooks';
+
+import {NewComment} from '../../../types/comment';
 import {fetchPostCommentAction} from '../../../store/api-actions';
 import {getCommentSubmitSuccessful} from '../../../store/app-data/selectors';
 

@@ -2,7 +2,6 @@ import ReactDOM from 'react-dom/client';
 import {Provider} from 'react-redux';
 import {ToastContainer} from 'react-toastify';
 import {HelmetProvider} from 'react-helmet-async';
-
 import 'react-toastify/dist/ReactToastify.css';
 
 import App from './components/app/app';

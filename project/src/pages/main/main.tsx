@@ -11,8 +11,8 @@ import MainEmpty from '../../components/main-empty/main-empty';
 import NotFound from '../../pages/not-found/not-found';
 
 import {useAppSelector} from '../../hooks';
-import {cities, SortType, MapStyle} from '../../consts';
 
+import {cities, SortType, MapStyle} from '../../consts';
 import {getSortOffers} from '../../store/app-data/selectors';
 
 function Main(): JSX.Element {

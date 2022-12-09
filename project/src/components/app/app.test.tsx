@@ -5,9 +5,9 @@ import {configureMockStore} from '@jedmao/redux-mock-store';
 import thunk from 'redux-thunk';
 
 import HistoryRouter from '../history-route/history-route';
-import {AuthorizationStatus, AppRoute, defaultCityInfo} from '../../consts';
 import App from './app';
 
+import {AuthorizationStatus, AppRoute, defaultCityInfo} from '../../consts';
 import {
   makeFakeOffers,
   fakeRoomInfo,

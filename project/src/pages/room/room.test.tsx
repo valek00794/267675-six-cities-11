@@ -8,6 +8,7 @@ import {Route, Routes} from 'react-router-dom';
 
 import HistoryRouter from '../../components/history-route/history-route';
 import Room from './room';
+
 import {fakeRoomInfo, makeFakeNearbyOffers, makeFakeOffers, makeFakeComments} from '../../utils/mocks';
 import {AuthorizationStatus, defaultCityInfo} from '../../consts';
 

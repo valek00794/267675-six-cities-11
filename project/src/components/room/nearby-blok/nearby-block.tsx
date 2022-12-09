@@ -4,11 +4,10 @@ import Map from '../../map/map';
 import NearbyRooms from './nearby-rooms';
 import Spinner from '../../spinner/spinner';
 
-import {MapStyle} from '../../../consts';
-
 import {useAppSelector} from '../../../hooks';
-import {getNearbyOffers, getNearbyOffersDataLoadingStatus} from '../../../store/app-data/selectors';
 
+import {MapStyle} from '../../../consts';
+import {getNearbyOffers, getNearbyOffersDataLoadingStatus} from '../../../store/app-data/selectors';
 
 function NearbyBlock(): JSX.Element {
   const nearbyOffers = useAppSelector(getNearbyOffers);
