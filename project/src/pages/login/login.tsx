@@ -1,5 +1,6 @@
 import {useRef, FormEvent, useEffect} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
+import {Helmet} from 'react-helmet-async';
 
 import {AuthData} from '../../types/auth-data';
 
@@ -48,6 +49,9 @@ function Login(): JSX.Element {
   return (
     <div className="page page--gray page--login">
       <header className="header">
+        <Helmet>
+          <title>6 cities  - Authorization</title>
+        </Helmet>
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">

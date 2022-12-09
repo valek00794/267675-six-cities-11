@@ -1,6 +1,7 @@
 import {useParams} from 'react-router';
 import {useEffect} from 'react';
 import classnames from 'classnames';
+import {Helmet} from 'react-helmet-async';
 
 import RoomReviews from '../../components/room/room-review/room-reviews';
 import NotFound from '../../pages/not-found/not-found';
@@ -49,6 +50,9 @@ function Room(): JSX.Element {
 
   return (
     <main className="page__main page__main--property">
+      <Helmet>
+        <title>{`6 cities - ${roomInfo.title} in ${roomInfo.city.name}`}</title>
+      </Helmet>
       <section className="property">
         <div className="property__gallery-container container">
           <div className="property__gallery">

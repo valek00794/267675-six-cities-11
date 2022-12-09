@@ -1,6 +1,7 @@
 import {useRef, useState} from 'react';
 import {useParams} from 'react-router';
 import classnames from 'classnames';
+import {Helmet} from 'react-helmet-async';
 
 import CitiesList from '../../components/cities-list/cities-list';
 import Sort from '../../components/sort/sort';
@@ -33,6 +34,9 @@ function Main(): JSX.Element {
 
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>6 cities  - best offers rental in {city}</title>
+      </Helmet>
       <main className={getMainBlockClassName()}>
         <h1 className="visually-hidden">Cities</h1>
         <CitiesList sort={sortRef.current} setUlState={setUlState} />
