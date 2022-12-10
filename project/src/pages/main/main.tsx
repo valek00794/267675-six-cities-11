@@ -1,6 +1,7 @@
 import {useRef, useState} from 'react';
 import {useParams} from 'react-router';
 import classnames from 'classnames';
+import {Helmet} from 'react-helmet-async';
 
 import CitiesList from '../../components/cities-list/cities-list';
 import Sort from '../../components/sort/sort';
@@ -10,8 +11,8 @@ import MainEmpty from '../../components/main-empty/main-empty';
 import NotFound from '../../pages/not-found/not-found';
 
 import {useAppSelector} from '../../hooks';
-import {cities, SortType, MapStyle} from '../../consts';
 
+import {cities, SortType, MapStyle} from '../../consts';
 import {getSortOffers} from '../../store/app-data/selectors';
 
 function Main(): JSX.Element {
@@ -33,6 +34,9 @@ function Main(): JSX.Element {
 
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>{city && `6 cities  - best offers rental in ${city}`}</title>
+      </Helmet>
       <main className={getMainBlockClassName()}>
         <h1 className="visually-hidden">Cities</h1>
         <CitiesList sort={sortRef.current} setUlState={setUlState} />

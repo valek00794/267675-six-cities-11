@@ -4,9 +4,12 @@ import {configureMockStore} from '@jedmao/redux-mock-store';
 import {Provider} from 'react-redux';
 import {Route, Routes} from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
+import {HelmetProvider} from 'react-helmet-async';
+
 
 import HistoryRouter from '../../components/history-route/history-route';
 import Favorites from './favorites';
+
 import {makeFakeFavoriteOffers} from '../../utils/mocks';
 import {AuthorizationStatus} from '../../consts';
 
@@ -21,11 +24,14 @@ describe('Page: Favorites', () => {
       DATA: {favoriteOffers: []},
     });
     render(
-      <Provider store={store}>
-        <HistoryRouter history={history}>
-          <Favorites />
-        </HistoryRouter>
-      </Provider>
+      <HelmetProvider>
+        <Provider store={store}>
+          <HistoryRouter history={history}>
+            <Favorites />
+          </HistoryRouter>
+        </Provider>
+      </HelmetProvider>
+
 
     );
     expect(screen.getByText(/Nothing yet saved/i)).toBeInTheDocument();
@@ -38,12 +44,13 @@ describe('Page: Favorites', () => {
       DATA: {favoriteOffers: fakeFavoriteOffers},
     });
     render(
-      <Provider store={store}>
-        <HistoryRouter history={history}>
-          <Favorites />
-        </HistoryRouter>
-      </Provider>
-
+      <HelmetProvider>
+        <Provider store={store}>
+          <HistoryRouter history={history}>
+            <Favorites />
+          </HistoryRouter>
+        </Provider>
+      </HelmetProvider>
     );
     expect(screen.getByText(/Saved listing/i)).toBeInTheDocument();
   });
@@ -59,18 +66,19 @@ describe('Page: Favorites', () => {
     const testLink = `/${favoriteOffersCity}`;
     history.push(testLink);
     render(
-      <Provider store={store}>
-        <HistoryRouter history={history}>
-          <Favorites />
-          <Routes>
-            <Route
-              path={testLink}
-              element={<h1>This is main {favoriteOffersCity} page</h1>}
-            />
-          </Routes>
-        </HistoryRouter>
-      </Provider>
-
+      <HelmetProvider>
+        <Provider store={store}>
+          <HistoryRouter history={history}>
+            <Favorites />
+            <Routes>
+              <Route
+                path={testLink}
+                element={<h1>This is main {favoriteOffersCity} page</h1>}
+              />
+            </Routes>
+          </HistoryRouter>
+        </Provider>
+      </HelmetProvider>
     );
     await userEvent.click(screen.getByText(favoriteOffersCity));
     expect(screen.getByText(new RegExp(`This is main ${favoriteOffersCity} page`, 'i'))).toBeInTheDocument();

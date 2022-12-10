@@ -1,6 +1,7 @@
 import {useParams} from 'react-router';
 import {useEffect} from 'react';
 import classnames from 'classnames';
+import {Helmet} from 'react-helmet-async';
 
 import RoomReviews from '../../components/room/room-review/room-reviews';
 import NotFound from '../../pages/not-found/not-found';
@@ -8,12 +9,11 @@ import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import NearbyBlock from '../../components/room/nearby-blok/nearby-block';
 
 import {useAppSelector, useAppDispatch} from '../../hooks';
+import useFavorite from '../../hooks/useFavorite';
 
 import {fetchRoomInfoAction, fetchCommentsAction, fetchNearbyOffersAction} from '../../store/api-actions';
 import {getAuthCheckedStatus} from '../../store/user-process/selectors';
 import {getOffersDataLoadingStatus, getRoomInfoDataLoadingStatus, getRoomInfo, getOffersIds} from '../../store/app-data/selectors';
-
-import useFavorite from '../../hooks/useFavorite';
 
 function Room(): JSX.Element {
   const isAuthChecked = useAppSelector(getAuthCheckedStatus);
@@ -49,6 +49,9 @@ function Room(): JSX.Element {
 
   return (
     <main className="page__main page__main--property">
+      <Helmet>
+        <title>{`6 cities - ${roomInfo.title} in ${roomInfo.city.name}`}</title>
+      </Helmet>
       <section className="property">
         <div className="property__gallery-container container">
           <div className="property__gallery">

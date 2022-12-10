@@ -1,8 +1,9 @@
 import {useNavigate} from 'react-router-dom';
 
+import {useAppDispatch, useAppSelector} from '../hooks';
+
 import {Offer} from '../types/offers';
 import {AppRoute, FavoriteStatus} from '../consts';
-import {useAppDispatch, useAppSelector} from '../hooks';
 import {getAuthorization} from '../store/user-process/selectors';
 import {fetchPostOfferFavoriteStatusAction} from '../store/api-actions';
 

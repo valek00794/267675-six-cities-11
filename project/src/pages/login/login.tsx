@@ -1,12 +1,14 @@
 import {useRef, FormEvent, useEffect} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
+import {Helmet} from 'react-helmet-async';
+
+import {useAppDispatch, useAppSelector} from '../../hooks';
 
 import {AuthData} from '../../types/auth-data';
-
-import {loginAction} from '../../store/api-actions';
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {getAuthorization} from '../../store/user-process/selectors';
 import {cities} from '../../consts';
+import {loginAction} from '../../store/api-actions';
+import {getAuthorization} from '../../store/user-process/selectors';
+
 
 function Login(): JSX.Element {
   const navigate = useNavigate();
@@ -48,6 +50,9 @@ function Login(): JSX.Element {
   return (
     <div className="page page--gray page--login">
       <header className="header">
+        <Helmet>
+          <title>6 cities  - Authorization</title>
+        </Helmet>
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">

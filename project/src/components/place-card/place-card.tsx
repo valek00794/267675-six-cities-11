@@ -1,9 +1,9 @@
 import {Link} from 'react-router-dom';
 import classnames from 'classnames';
 
-import {Offer} from '../../types/offers';
-
 import useFavorite from '../../hooks/useFavorite';
+
+import {Offer} from '../../types/offers';
 
 type PlaceCardProps = {
   offer: Offer;

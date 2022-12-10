@@ -5,6 +5,7 @@ import {Provider} from 'react-redux';
 
 import HistoryRouter from '../history-route/history-route';
 import Map from './map';
+
 import {MapStyle} from '../../consts';
 import {makeFakeOffers, fakeRoomInfo} from '../../utils/mocks';
 

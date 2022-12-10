@@ -1,12 +1,13 @@
 import {Link} from 'react-router-dom';
+import {Helmet} from 'react-helmet-async';
 
 import Footer from '../../components/footer/footer';
 import FavoriteCard from '../../components/favorites/favorites-card';
 import FavoriteEmpty from '../../components/favorites/favorites-empty';
 
 import {useAppSelector} from '../../hooks';
-import {getFavoriteOffers} from '../../store/app-data/selectors';
 
+import {getFavoriteOffers} from '../../store/app-data/selectors';
 
 function Favorites(): JSX.Element {
   const favoriteOffers = useAppSelector(getFavoriteOffers);
@@ -15,6 +16,9 @@ function Favorites(): JSX.Element {
   return (
     <>
       <main className="page__main page__main--favorites">
+        <Helmet>
+          <title>6 cities  - your list of favorite places</title>
+        </Helmet>
         <div className="page__favorites-container container">
           {favoriteOffers.length === 0 && <FavoriteEmpty />}
           {favoriteOffers.length !== 0 &&

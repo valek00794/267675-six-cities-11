@@ -6,6 +6,7 @@ import * as router from 'react-router';
 import * as redux from '../hooks';
 
 import useFavorite from './useFavorite';
+
 import {fakeRoomInfo} from '../utils/mocks';
 import {AuthorizationStatus} from '../consts';
 
