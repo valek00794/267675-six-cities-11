@@ -14,6 +14,8 @@ import useFavorite from '../../hooks/useFavorite';
 import {fetchRoomInfoAction, fetchCommentsAction, fetchNearbyOffersAction} from '../../store/api-actions';
 import {getAuthCheckedStatus} from '../../store/user-process/selectors';
 import {getOffersDataLoadingStatus, getRoomInfoDataLoadingStatus, getRoomInfo, getOffersIds} from '../../store/app-data/selectors';
+import {RoomInfoPhotoCountSlice} from '../../consts';
+import { getRoundRatingStarsWidthPercent } from '../../utils/utils';
 
 function Room(): JSX.Element {
   const isAuthChecked = useAppSelector(getAuthCheckedStatus);
@@ -47,6 +49,7 @@ function Room(): JSX.Element {
       {'property__bookmark-button--active': roomInfo.isFavorite}
     );
 
+  const ratingStarsWidth = getRoundRatingStarsWidthPercent(roomInfo.rating);
   return (
     <main className="page__main page__main--property">
       <Helmet>
@@ -55,7 +58,7 @@ function Room(): JSX.Element {
       <section className="property">
         <div className="property__gallery-container container">
           <div className="property__gallery">
-            {roomInfo.images.map((img) => (
+            {roomInfo.images.slice(RoomInfoPhotoCountSlice.Begin, RoomInfoPhotoCountSlice.End).map((img) => (
               <div className="property__image-wrapper" key={img}>
                 <img className="property__image" src={img} alt="Photo studio" />
               </div>)
@@ -86,7 +89,7 @@ function Room(): JSX.Element {
             </div>
             <div className="property__rating rating">
               <div className="property__stars rating__stars">
-                <span style={{width: `${roomInfo.rating * 20}%`}}></span>
+                <span style={{width: `${ratingStarsWidth}%`}}></span>
                 <span className="visually-hidden">Rating</span>
               </div>
               <span className="property__rating-value rating__value">{roomInfo.rating}</span>

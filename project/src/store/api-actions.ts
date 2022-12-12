@@ -35,8 +35,6 @@ export const fetchRoomInfoAction = createAsyncThunk<Offer, string | undefined, {
 }>(
   'data/fetchRoomInfo',
   async (id, {extra: api}) => {
-    // eslint академии ошибочно выдает предупреждение здесь и далее в файле
-    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const {data} = await api.get<Offer>(APIRoute.Offers + id);
     return data;
   },
@@ -49,7 +47,6 @@ export const fetchCommentsAction = createAsyncThunk<Comment[], string | undefine
 }>(
   'data/fetchComments',
   async (id, {extra: api}) => {
-    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const {data} = await api.get<Comment[]>(APIRoute.Comments + id);
     return data;
   },
@@ -62,7 +59,6 @@ export const fetchPostCommentAction = createAsyncThunk<Comment[], [NewComment, s
 }>(
   'data/addComment',
   async ([{comment, rating}, id], {extra: api}) => {
-    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const {data} = await api.post<Comment[]>(APIRoute.Comments + id, {comment, rating});
     return data;
   },
@@ -75,7 +71,6 @@ export const fetchNearbyOffersAction = createAsyncThunk<Offer[], string | undefi
 }>(
   'data/fetchNearbyOffers',
   async (id, {extra: api}) => {
-    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const {data} = await api.get<Offer[]>(APIRoute.Offers + id + APIRoute.NearbyOffers);
     return data;
   },
@@ -88,7 +83,6 @@ export const fetchFavoriteOffersAction = createAsyncThunk<Offer[], undefined, {
 }>(
   'data/fetchFavoriteOffers',
   async (_arg, {extra: api}) => {
-    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const {data} = await api.get<Offer[]>(APIRoute.Favorite);
     return data;
   },
@@ -101,7 +95,6 @@ export const fetchPostOfferFavoriteStatusAction = createAsyncThunk<Offer, [strin
 }>(
   'data/changeOfferFavoriteStatus',
   async ([id, status], {extra: api}) => {
-    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const {data} = await api.post<Offer>(APIRoute.Favorite + id + status);
     return data;
   },
