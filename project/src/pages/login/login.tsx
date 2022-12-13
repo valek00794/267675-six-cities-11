@@ -76,6 +76,7 @@ function Login(): JSX.Element {
               className="login__form form"
               action="#"
               method="post"
+              data-testid="form-submit"
               // eslint академии ошибочно выдает предупреждение()
               // eslint-disable-next-line @typescript-eslint/no-misused-promises
               onSubmit={handleSubmit(onSubmit)}
