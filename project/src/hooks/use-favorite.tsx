@@ -1,6 +1,6 @@
 import {useNavigate} from 'react-router-dom';
 
-import {useAppDispatch, useAppSelector} from '../hooks';
+import {useAppDispatch, useAppSelector} from '.';
 
 import {Offer} from '../types/offers';
 import {AppRoute, FavoriteStatus} from '../consts';

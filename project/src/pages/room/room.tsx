@@ -9,7 +9,7 @@ import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import NearbyBlock from '../../components/room/nearby-blok/nearby-block';
 
 import {useAppSelector, useAppDispatch} from '../../hooks';
-import useFavorite from '../../hooks/useFavorite';
+import useFavorite from '../../hooks/use-favorite';
 
 import {fetchRoomInfoAction, fetchCommentsAction, fetchNearbyOffersAction} from '../../store/api-actions';
 import {getAuthCheckedStatus} from '../../store/user-process/selectors';

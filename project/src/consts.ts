@@ -49,6 +49,11 @@ export enum RoomInfoPhotoCountSlice {
   End = 6,
 }
 
+export enum CommentsCountSlice {
+  Begin = 0,
+  End = 10,
+}
+
 export const cities = [
   'Paris',
   'Cologne',

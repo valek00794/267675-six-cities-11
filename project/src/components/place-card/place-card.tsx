@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 import classnames from 'classnames';
 
-import useFavorite from '../../hooks/useFavorite';
+import useFavorite from '../../hooks/use-favorite';
 
 import {Offer} from '../../types/offers';
 import {getRoundRatingStarsWidthPercent, setFirstLetterToUppercase} from '../../utils/utils';
@@ -21,6 +21,8 @@ function PlaceCard({offer, setActiveCard}: PlaceCardProps): JSX.Element {
   const offerType = setFirstLetterToUppercase(offer.type);
 
   const ratingStarsWidth = getRoundRatingStarsWidthPercent(offer.rating);
+
+  const handleFavorite = useFavorite(offer);
 
   return (
     <article
@@ -46,7 +48,7 @@ function PlaceCard({offer, setActiveCard}: PlaceCardProps): JSX.Element {
           <button
             className={getFavoriteButtonClassName()}
             type="button"
-            onClick={useFavorite(offer)}
+            onClick={handleFavorite}
             data-testid="to-bookmarks"
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
