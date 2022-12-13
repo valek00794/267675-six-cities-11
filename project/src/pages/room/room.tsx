@@ -28,10 +28,16 @@ function Room(): JSX.Element {
   const handleFavorite = useFavorite(roomInfo);
 
   useEffect(() => {
-    dispatch(fetchRoomInfoAction(id));
-    dispatch(fetchCommentsAction(id));
-    dispatch(fetchNearbyOffersAction(id));
-    window.scrollTo(0, 0);
+    let isMounted = true;
+    if (isMounted) {
+      dispatch(fetchRoomInfoAction(id));
+      dispatch(fetchCommentsAction(id));
+      dispatch(fetchNearbyOffersAction(id));
+      window.scrollTo(0, 0);
+    }
+    return () => {
+      isMounted = false;
+    };
   }, [id]);
 
   if (id && !availableOffersIDs.includes(id)) {
